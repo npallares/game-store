@@ -1,0 +1,14 @@
+.cardContenier{
+    width: 60px;
+    height: 60px;
+    margin: 20px;
+    cursor: pointer;
+}
+
+.selected{
+    border: 1px solid red;
+}
+
+.noSelected{
+    border: 1px solid rgb(0, 0, 0);
+}
