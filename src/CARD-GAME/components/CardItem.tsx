@@ -1,38 +1,63 @@
-import React, { useContext, useEffect, useState } from "react";
-import { CardState, CardsContext } from "../context/CardsComponentContext";
+import { CardState } from "../context/CardsComponentContext";
 import styles from "./CardItem.module.css";
-import { GameContext } from "../context/GameComponentContext";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+import {
+  resetAll,
+  setFirstCard,
+  setIsMatch,
+  setSecondCard,
+} from "../../redux/slices/game.slice";
+import { setCardViewFront } from "../../redux/slices/cards.slice";
+import { useState } from "react";
 
 type Card = {
   card: CardState;
 };
 
 export const CardItem = ({ card }: Card) => {
-  const gameContext = useContext(GameContext);
-  const cardsContext = useContext(CardsContext);
+  
+  const dispatch = useAppDispatch();
+  const [data, setData] = useState(null)
+  
+  const cardsState = useAppSelector((state) => state.cardsReducer);
+  const gameState = useAppSelector((state) => state.gameReducer);
+  
+  const { value, id, ViewFront } = card;
 
-  const [isSelected, setIsSelected] = useState(false);
+  const cardSeters = () => {
+    if (gameState.firstCardId === null) {
+      dispatch(
+        setFirstCard({
+          firstCard: value,
+          firstCardId: id,
+        })
+      );
+      dispatch(setCardViewFront(id));  
 
-  const { value, id } = card;
-  const {changeCardToDone} = cardsContext;
-
-  const { game, setFirstCard, setSecondCard, resetAll, checkMatch } =
-    gameContext;
+    } else if (gameState.secondCardId === null) {
+      dispatch(
+        setSecondCard({
+          secondCard: value,
+          secondCardId: id,
+        })
+      );
+      dispatch(setIsMatch());
+      
+      dispatch(setCardViewFront(id));  
+      const reset = () => dispatch(resetAll());
+      setTimeout(reset, 3000);
+    }
+  };
 
   const handlerClick = () => {
-    if (game.firstCard === null) setFirstCard(value, id);
-    else if (game.secondCard === null) {
-      setSecondCard(value, id);
-      checkMatch();
-     /*  const myCheck = checkMatch()
-      if(myCheck) changeCardToDone(card) */
-    }
-    //console.log(game);
+    cardSeters();
   };
 
   return (
     <div
-      className={`${styles.cardContenier} ${card.done ? styles.selected : styles.noSelected}`}
+      className={`${styles.cardContenier} ${
+        ViewFront ? styles.selected : styles.noSelected
+      }`}
       onClick={handlerClick}
     >
       {value}

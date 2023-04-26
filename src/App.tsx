@@ -1,13 +1,7 @@
-import { useContext, useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
 import "./App.css";
-import {
-  GameComponentContext,
-  GameContext,
-} from "./CARD-GAME/context/GameComponentContext";
-import CardGame from "./CARD-GAME/components/CardGame";
+import { GameComponentContext } from "./CARD-GAME/context/GameComponentContext";
 import { CardsComponentContext } from "./CARD-GAME/context/CardsComponentContext";
+import CardGame from "./CARD-GAME/components/CardGame";
 
 function App() {
   return (

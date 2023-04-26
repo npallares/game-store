@@ -10,6 +10,7 @@ export type CardState = {
   frontImg: string;
   backImg: string;
   done: boolean;
+  ViewFront: boolean;
 };
 
 export type CardsContextProps = {
@@ -28,6 +29,7 @@ const INITIAL_STATE: CardState[] = [
     frontImg: "img/goku.jpg",
     backImg: "img/bk.jpg",
     done: false,
+    ViewFront: false,
   },
   {
     id: "vegeta01",
@@ -35,6 +37,7 @@ const INITIAL_STATE: CardState[] = [
     frontImg: "img/vegeta.jpg",
     backImg: "img/bk.jpg",
     done: false,
+    ViewFront: false,
   },
   {
     id: "goku02",
@@ -42,6 +45,7 @@ const INITIAL_STATE: CardState[] = [
     frontImg: "img/goku.jpg",
     backImg: "img/bk.jpg",
     done: false,
+    ViewFront: false,
   },
   {
     id: "vegeta02",
@@ -49,6 +53,7 @@ const INITIAL_STATE: CardState[] = [
     frontImg: "img/vegeta.jpg",
     backImg: "img/bk.jpg",
     done: false,
+    ViewFront: false,
   },
 ];
 
