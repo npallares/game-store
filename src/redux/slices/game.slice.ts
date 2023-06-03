@@ -7,7 +7,7 @@ interface GameStateReducer {
   firstCardId: null | string;
   secondCard: null | string;
   secondCardId: null | string;
-  isMatch: boolean;
+  isMatch: null | boolean;
 }
 
 interface SetFirstCard {
@@ -26,7 +26,7 @@ const initialState: GameStateReducer = {
   firstCardId: null,
   secondCard: null,
   secondCardId: null,
-  isMatch: false,
+  isMatch: null,
 };
 
 export const gameSlice = createSlice({
