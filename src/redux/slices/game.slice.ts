@@ -11,13 +11,13 @@ interface GameStateReducer {
 }
 
 interface SetFirstCard {
-  firstCard: null | string;
-  firstCardId: null | string;
+  value: string | null;
+  id: string | null;
 }
 
 interface SetSecondCard {
-  secondCard: null | string;
-  secondCardId: null | string;
+  id: string | null;
+  value: string | null;
 }
 
 
@@ -33,32 +33,36 @@ export const gameSlice = createSlice({
   name: "game",
   initialState,
   reducers: {
-    setFirstCard: (state, action: PayloadAction<SetFirstCard>) => {
-      state.firstCard = action.payload.firstCard;
-      state.firstCardId = action.payload.firstCardId;
+    setFirstCardRedux: (state, action: PayloadAction<SetFirstCard>) => {
+      state.firstCard = action.payload.value;
+      state.firstCardId = action.payload.id;
     },
-    setSecondCard: (state, action: PayloadAction<SetSecondCard>) => {
-      state.secondCard = action.payload.secondCard;
-      state.secondCardId = action.payload.secondCardId;
+    setSecondCardRedux: (state, action: PayloadAction<SetSecondCard>) => {
+      state.secondCard = action.payload.value;
+      state.secondCardId = action.payload.id;
     },
-    setIsMatch: (state)=>{
-       const isMatch =
-         state.firstCard === state.secondCard &&
-         state.firstCard !== null &&
-         state.secondCard !== null;
-        
-         isMatch
-           ? (state.isMatch = true)
-           : (state.isMatch = false);
+    setIsMatchRedux: (state) => {
+      const isMatch =
+        state.firstCard === state.secondCard &&
+        state.firstCard !== null &&
+        state.secondCard !== null;
+
+      if (isMatch) state.isMatch = true;
+      if (!isMatch) state.isMatch = false;
     },
-    resetAll: (state)=>{
-        state.firstCard = null;
-        state.firstCardId = null;
-        state.secondCard = null;
-        state.secondCardId = null;
-        state.isMatch = false;
-    }
+    resetAllRedux: (state) => {
+      state.firstCard = null;
+      state.firstCardId = null;
+      state.secondCard = null;
+      state.secondCardId = null;
+      state.isMatch = false;
+    },
   },
 });
 
-export const { setFirstCard, setSecondCard, setIsMatch, resetAll } = gameSlice.actions;
+export const {
+  setFirstCardRedux,
+  setSecondCardRedux,
+  setIsMatchRedux,
+  resetAllRedux,
+} = gameSlice.actions;
