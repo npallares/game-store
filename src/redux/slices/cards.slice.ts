@@ -9,7 +9,7 @@ export type CardState = {
   ViewFront: boolean
 };
 
-const initialState: CardState[] = [
+export const initialState: CardState[] = [
   {
     id: "goku01",
     value: "goku",
@@ -48,6 +48,10 @@ export const cardsSlice = createSlice({
   name: "cards",
   initialState,
   reducers: {
+    setCardIsDone: (state, action: PayloadAction<string>) => {
+      const index = state.findIndex((card) => card.id === action.payload);
+      state[index].done = true;
+    },
     setCardViewFront: (state, action: PayloadAction<string>) => {
       const index = state.findIndex((card) => card.id === action.payload);
       state[index].ViewFront = true;
@@ -59,4 +63,5 @@ export const cardsSlice = createSlice({
   },
 });
 
-export const { setCardViewFront, unsetCardViewFront } = cardsSlice.actions;
+export const { setCardViewFront, unsetCardViewFront, setCardIsDone } =
+  cardsSlice.actions;

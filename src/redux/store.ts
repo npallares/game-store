@@ -4,8 +4,8 @@ import { cardsSlice, gameSlice } from "./slices";
 
 export const store = configureStore({
   reducer: {
-    gameReducer: gameSlice.reducer,
-    cardsReducer: cardsSlice.reducer
+    game: gameSlice.reducer,
+    cards: cardsSlice.reducer
   },
 });
 
