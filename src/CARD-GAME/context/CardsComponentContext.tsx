@@ -9,8 +9,8 @@ export type CardState = {
   value: string;
   frontImg: string;
   backImg: string;
-  done: boolean;
-  ViewFront: boolean;
+  done: boolean | null;
+  ViewFront: boolean | null;
 };
 
 export type CardsContextProps = {

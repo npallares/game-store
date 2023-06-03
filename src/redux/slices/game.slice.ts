@@ -21,7 +21,7 @@ interface SetSecondCard {
 }
 
 
-const initialState: GameStateReducer = {
+export const initialState: GameStateReducer = {
   firstCard: null,
   firstCardId: null,
   secondCard: null,
