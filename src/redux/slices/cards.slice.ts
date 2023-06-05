@@ -6,15 +6,15 @@ export type CardState = {
   frontImg: string;
   backImg: string;
   done: null | boolean;
-  ViewFront: boolean | null
+  ViewFront: boolean | null;
 };
 
 export const initialState: CardState[] = [
   {
     id: "goku01",
     value: "goku",
-    frontImg: "img/goku.jpg",
-    backImg: "img/bk.jpg",
+    frontImg: "assets/cards/drgonBallImages/goku.jpg",
+    backImg: "dragonball",
     done: null,
     ViewFront: null,
   },
@@ -22,7 +22,7 @@ export const initialState: CardState[] = [
     id: "vegeta01",
     value: "vegeta",
     frontImg: "img/vegeta.jpg",
-    backImg: "img/bk.jpg",
+    backImg: "dragonball",
     done: null,
     ViewFront: null,
   },
@@ -30,7 +30,7 @@ export const initialState: CardState[] = [
     id: "goku02",
     value: "goku",
     frontImg: "img/goku.jpg",
-    backImg: "img/bk.jpg",
+    backImg: "dragonball",
     done: null,
     ViewFront: null,
   },
@@ -38,7 +38,7 @@ export const initialState: CardState[] = [
     id: "vegeta02",
     value: "vegeta",
     frontImg: "img/vegeta.jpg",
-    backImg: "img/bk.jpg",
+    backImg: "dragonball",
     done: null,
     ViewFront: null,
   },
@@ -48,25 +48,12 @@ export const cardsSlice = createSlice({
   name: "cards",
   initialState,
   reducers: {
-    setCardOneIsDoneTrue: (state, action: PayloadAction<string>) => {
+    setCardIsDoneTrue: (state, action: PayloadAction<string>) => {
       console.log("Payload one", action.payload);
-      const index = state.findIndex(
-        (card) => card.id === action.payload
-        );
-        state[index].done = true;
-      },
-      setCardTwoIsDoneTrue: (state, action: PayloadAction<string>) => {
-      console.log("Payload two", action.payload);
-      const index = state.findIndex(
-        (card) => card.id === action.payload
-      );
+      const index = state.findIndex((card) => card.id === action.payload);
       state[index].done = true;
     },
-    setCardOneIsDoneFalse: (state, action: PayloadAction<string>) => {
-      const index = state.findIndex((card) => card.id === action.payload);
-      state[index].done = false;
-    },
-    setCardTwoIsDoneFalse: (state, action: PayloadAction<string>) => {
+    setCardIsDoneFalse: (state, action: PayloadAction<string>) => {
       const index = state.findIndex((card) => card.id === action.payload);
       state[index].done = false;
     },
@@ -84,8 +71,6 @@ export const cardsSlice = createSlice({
 export const {
   setCardViewFrontTrue,
   setCardViewFrontFalse,
-  setCardOneIsDoneTrue,
-  setCardTwoIsDoneTrue,
-  setCardTwoIsDoneFalse,
-  setCardOneIsDoneFalse,
+  setCardIsDoneTrue,
+  setCardIsDoneFalse,
 } = cardsSlice.actions;

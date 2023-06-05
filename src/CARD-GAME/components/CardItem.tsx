@@ -1,36 +1,22 @@
 import { CardState } from "../context/CardsComponentContext";
+import { images } from "../../hooks/getImages";
 import styles from "./CardItem.module.css";
 
+export const CardItem = ({ card }: { card: CardState }) => {
+  const { id, value, done, ViewFront, backImg } = card;
 
-export const CardItem = ({
-  card,
-}: {
-  card: CardState;
-}) => {
-  const {id, value, done, ViewFront } = card
-  if(done === true){ 
-    console.log("newcardAdentro", card);
+
+  if (done === true || ViewFront === true) {
     return (
-      <div
-        className={`${styles.cardContenier} ${
-          done ? styles.done : styles.noSelected
-        }`}
-      >
-        {value}
+      <div className={`${styles.cardContenier} ${styles.done}`}>
+        <img src={images[value]} alt={id} />
       </div>
     );
   }
+
   return (
-    <div
-      /* className={`${styles.cardContenier} ${
-        done ? styles.selected : styles.noSelected
-      }`} */
-      className={`${styles.cardContenier} ${
-        ViewFront ? styles.ViewFront : styles.noSelected
-      }`}
-      key={id}
-    >
-      {value}
+    <div className={`${styles.cardContenier}`}>
+      <img src={images[backImg]} alt={id} />
     </div>
   );
 };

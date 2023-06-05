@@ -1,9 +1,8 @@
-import { useEffect, useState } from "react";
-//import { CardState, CardsContext } from "../context/CardsComponentContext";
+import { useEffect } from "react";
+import styles from "./CardGame.module.css";
 import { CardItem } from "./CardItem";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import {
-  initialState,
   resetAllRedux,
   setFirstCardRedux,
   setIsMatchRedux,
@@ -11,10 +10,9 @@ import {
 } from "../../redux/slices/game.slice";
 import {
   CardState,
-  setCardOneIsDoneFalse,
-  setCardOneIsDoneTrue,
-  setCardTwoIsDoneFalse,
-  setCardTwoIsDoneTrue,
+  setCardIsDoneFalse,
+  setCardIsDoneTrue,
+  setCardViewFrontFalse,
   setCardViewFrontTrue,
 } from "../../redux/slices/cards.slice";
 
@@ -23,141 +21,92 @@ const CardGame = () => {
   const gameState = useAppSelector((state) => state.game);
   const dispatch = useAppDispatch();
 
-  const getGameState = () => {
-    const newGameState = {
-      firstCard: gameState.firstCard,
-      firstCardId: gameState.firstCardId,
-      secondCard: gameState.secondCard,
-      secondCardId: gameState.secondCardId,
-      isMatch: gameState.isMatch,
-    };
-    //console.log("newGameState", newGameState);
-    return newGameState;
+  const resetAll = () => {
+    dispatch(resetAllRedux());
   };
 
-  const getCardState = () => {
-    const newCardState = cardsState;
-    //dispatch(setCardIsDone(newCardState[id]));
-    //console.log("newCardState", newCardState);
-    return newCardState;
+  const resetGametimeOut = () => setTimeout(resetAll, 1500);
+
+  const resetViewFront = (firstCardId: string, secondCardId: string) => {
+    dispatch(setCardViewFrontFalse(firstCardId));
+    dispatch(setCardViewFrontFalse(secondCardId));
   };
 
-  let newGameState;
-  let newCardState ;
+  const resetViewFrontTimeOut = (firstCardId: string, secondCardId: string) =>
+    setTimeout(() => resetViewFront(firstCardId, secondCardId), 1000);
+
+  const { firstCardId, secondCardId, isMatch } = gameState;
+
+  const checkIsMatchTrue =
+    firstCardId !== null && secondCardId !== null && isMatch === true;
   
+  const checkIsMatchFalse =
+    firstCardId !== null && secondCardId !== null && isMatch === false;
+
+  const checkIsMatchNull =
+    firstCardId !== null && secondCardId !== null && isMatch === null;
+
+  const gameFunction = () => {
+    if (!checkIsMatchNull) {
+      if (checkIsMatchTrue) {
+        console.log("Adentro checkMatchTrue", checkIsMatchTrue);
+        dispatch(setCardIsDoneTrue(firstCardId));
+        dispatch(setCardIsDoneTrue(secondCardId));
+        resetViewFrontTimeOut(firstCardId, secondCardId);
+        resetGametimeOut();
+        return;
+      }
+      if (checkIsMatchFalse) {
+        console.log("Adentro checkMatchFalse", checkIsMatchTrue);
+        resetViewFrontTimeOut(firstCardId, secondCardId);
+        resetGametimeOut();
+        return;
+      }
+      return;
+    }
+    return;
+  };  
+
   const settingCards = (value: string, id: string) => {
     //console.log("seteo first", newgameState, newCardState);
-    if (gameState.firstCardId === null) {
+    if (firstCardId === null) {
       dispatch(setFirstCardRedux({ value, id }));
-      dispatch(setCardOneIsDoneFalse(id));
+      dispatch(setCardIsDoneFalse(id));
       dispatch(setCardViewFrontTrue(id));
       return;
     }
-    if (gameState.secondCardId === null) {
+    if (secondCardId === null) {
       dispatch(setSecondCardRedux({ value, id }));
-      dispatch(setCardTwoIsDoneFalse(id));
+      dispatch(setCardIsDoneFalse(id));
       dispatch(setCardViewFrontTrue(id));
-      dispatch(setIsMatchRedux());   
-      return     //console.log("seteo second");
-    }
-    
-  };
-
-  const checkIsMatch =()=>{
-    console.log("CheckisMatch", gameState);
-    if(gameState)return;
-    return
-  }
-
-  const handlesClick = async (value: string, id: string) => {
-    try{
-    const resultPromise = new Promise((resolve, reject) => {
-        resolve(settingCards(value, id))
-    })
-    console.log("resultPromise",resultPromise)
-    return resultPromise;
-    } catch (error){
-      console.log("error",Error)
-      throw error;
+      dispatch(setIsMatchRedux());
+      return;
     }
   };
-
-  /* const dispatchCardsIsDoneTrue = (
-    firstCardEffect: string,
-    secondCardEffect: string
-  ) => {
-    dispatch(setCardIsDoneTrue(firstCardEffect));
-    dispatch(setCardIsDoneTrue(secondCardEffect));
-  }; */
-
+  
+  const handlesClick = (value: string, id: string) => {
+    settingCards(value, id);
+  };
   
   useEffect(() => {
-    console.log("useEffect");
-    if (gameState) {
-      const firstCardEffect = gameState.firstCard;
-      const firstCardIdEffect = gameState.firstCardId;
-      const secondCardEffect = gameState.secondCard;
-      const secondCardIdEffect = gameState.secondCardId;
-      const isMatch =
-        firstCardEffect !== null &&
-        firstCardIdEffect !== null &&
-        secondCardEffect !== null &&
-        secondCardIdEffect !== null &&
-        firstCardEffect === secondCardEffect;
-      console.log("useEffect", isMatch, firstCardIdEffect, secondCardIdEffect);
-      if (isMatch) {
-        console.log("IS MATCH", firstCardIdEffect, secondCardIdEffect);
-        dispatch(setCardOneIsDoneTrue(firstCardIdEffect));
-        dispatch(setCardTwoIsDoneTrue(secondCardIdEffect));
-      }
-    }
-    //if (isMatchNull ) dispatch(setCardIsDoneTrue(firstCardIdEffect));
-    //if (isMatchNull) dispatch(setCardIsDoneTrue(secondCardidEffect));
-  }, [gameState, dispatch]);
-  
+    gameFunction();
+  }, [gameState]);
+
   return (
-    <>
+    <div>
       {cardsState.map((card: CardState) => {
         return (
           <button
-          key={card.id}
-          onClick={() => handlesClick(card.value, card.id)}
+            key={card.id}
+            className={styles.cardButton}
+            onClick={() => handlesClick(card.value, card.id)}
           >
             <CardItem card={card} />
           </button>
         );
       })}
-    </>
+    </div>
   );
 };
 
 export default CardGame;
-/* const reset = () => {
-  dispatch(resetAllRedux());
-  setFirstCard(null);
-  //setFirstCardId("");
-  setSecondCard(null);
-  //setSecondCardId("");
-}; */
-//const timeOut = () => setTimeout(reset, 3000);
-
-/*  const searchCard = (id: string) => {
-  const selectedCard = cards.filter((card) => card.id === id);
-  return selectedCard;
-};
-*/
-
-// const ceckIsMatch = () => firstCard === secondCard ? console.log("isMatch") : console.log("No")
-
-/*  checkIsMatch(newgameState){
-  const isMatch = newgameState.isMatch
-  console.log("isMatch",isMatch)
-  return isMatch 
-} */
-/* const isMatch = (newgameState.firstCardId === newgameState.secondCardId) {
-  //ceckIsMatchRedux(newgameState);
-  return newgameState;
-} */
-//setSecondCardId(id);
-//setSecondCard(value);
-//console.log("newgameState", newgameState);

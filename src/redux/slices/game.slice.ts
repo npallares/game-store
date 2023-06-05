@@ -55,7 +55,7 @@ export const gameSlice = createSlice({
       state.firstCardId = null;
       state.secondCard = null;
       state.secondCardId = null;
-      state.isMatch = false;
+      state.isMatch = null;
     },
   },
 });

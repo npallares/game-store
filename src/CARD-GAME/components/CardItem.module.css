@@ -1,18 +1,22 @@
-.cardContenier{
-    width: 60px;
-    height: 60px;
-    margin: 20px;
-    cursor: pointer;
+.cardContenier {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  object-fit: cover;
+  height: 100%;
 }
 
-.done{
-    border: 1px solid red;
+.cardContenier img {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
 }
 
-.ViewFront{
-    border: 1px solid rgb(0, 168, 0);
+.done {
+  border: 1px solid red;
 }
 
-.noSelected{
-    border: 1px solid rgb(0, 0, 0);
+.ViewFront {
+  border: 1px solid rgb(0, 168, 0);
 }
