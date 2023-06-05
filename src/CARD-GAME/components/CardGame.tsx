@@ -16,10 +16,17 @@ import {
   setCardViewFrontTrue,
 } from "../../redux/slices/cards.slice";
 
+
 const CardGame = () => {
   const cardsState = useAppSelector((state) => state.cards);
   const gameState = useAppSelector((state) => state.game);
   const dispatch = useAppDispatch();
+  
+  const checkIsDone = (id: string) => {
+    const index = cardsState.findIndex((card) => card.id === id);
+    const isDone = cardsState[index].done;
+    return isDone;
+  };
 
   const resetAll = () => {
     dispatch(resetAllRedux());
@@ -85,12 +92,15 @@ const CardGame = () => {
   };
   
   const handlesClick = (value: string, id: string) => {
+    const isDone = checkIsDone(id)
+    if(isDone) return;
     settingCards(value, id);
   };
   
   useEffect(() => {
     gameFunction();
-  }, [gameState]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [gameState.isMatch]);
 
   return (
     <div>
