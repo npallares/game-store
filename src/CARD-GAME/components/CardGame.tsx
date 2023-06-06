@@ -15,18 +15,13 @@ import {
   setCardViewFrontFalse,
   setCardViewFrontTrue,
 } from "../../redux/slices/cards.slice";
+import checkIsDone from "../../hooks/checkIsDone";
 
 
 const CardGame = () => {
   const cardsState = useAppSelector((state) => state.cards);
   const gameState = useAppSelector((state) => state.game);
   const dispatch = useAppDispatch();
-  
-  const checkIsDone = (id: string) => {
-    const index = cardsState.findIndex((card) => card.id === id);
-    const isDone = cardsState[index].done;
-    return isDone;
-  };
 
   const resetAll = () => {
     dispatch(resetAllRedux());
@@ -56,7 +51,6 @@ const CardGame = () => {
   const gameFunction = () => {
     if (!checkIsMatchNull) {
       if (checkIsMatchTrue) {
-        console.log("Adentro checkMatchTrue", checkIsMatchTrue);
         dispatch(setCardIsDoneTrue(firstCardId));
         dispatch(setCardIsDoneTrue(secondCardId));
         resetViewFrontTimeOut(firstCardId, secondCardId);
@@ -64,7 +58,6 @@ const CardGame = () => {
         return;
       }
       if (checkIsMatchFalse) {
-        console.log("Adentro checkMatchFalse", checkIsMatchTrue);
         resetViewFrontTimeOut(firstCardId, secondCardId);
         resetGametimeOut();
         return;
@@ -75,7 +68,6 @@ const CardGame = () => {
   };  
 
   const settingCards = (value: string, id: string) => {
-    //console.log("seteo first", newgameState, newCardState);
     if (firstCardId === null) {
       dispatch(setFirstCardRedux({ value, id }));
       dispatch(setCardIsDoneFalse(id));
@@ -92,8 +84,8 @@ const CardGame = () => {
   };
   
   const handlesClick = (value: string, id: string) => {
-    const isDone = checkIsDone(id)
-    if(isDone) return;
+    const isDone = checkIsDone(id, cardsState)
+    if (isDone) return;
     settingCards(value, id);
   };
   

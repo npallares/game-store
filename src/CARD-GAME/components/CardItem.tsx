@@ -7,8 +7,11 @@ export const CardItem = ({ card }: { card: CardState }) => {
 
 
   if (done === true || ViewFront === true) {
+
+    const FrontStyle = done ? styles.done : styles.ViewFront; 
+
     return (
-      <div className={`${styles.cardContenier} ${styles.done}`}>
+      <div className={`${styles.cardContenier} ${FrontStyle}`}>
         <img src={images[value]} alt={id} />
       </div>
     );

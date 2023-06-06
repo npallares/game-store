@@ -14,9 +14,9 @@
 }
 
 .done {
-  border: 1px solid red;
+  border: 2px solid red;
 }
 
 .ViewFront {
-  border: 1px solid rgb(0, 168, 0);
+  border: 2px solid rgb(0, 168, 0);
 }
