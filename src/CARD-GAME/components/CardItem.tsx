@@ -1,14 +1,12 @@
 import { CardState } from "../context/CardsComponentContext";
-import { images } from "../../hooks/getImages";
+import { images } from "../../helpers/getImages";
 import styles from "./CardItem.module.css";
 
 export const CardItem = ({ card }: { card: CardState }) => {
   const { id, value, done, ViewFront, backImg } = card;
 
-
   if (done === true || ViewFront === true) {
-
-    const FrontStyle = done ? styles.done : styles.ViewFront; 
+    const FrontStyle = done ? styles.done : styles.ViewFront;
 
     return (
       <div className={`${styles.cardContenier} ${FrontStyle}`}>

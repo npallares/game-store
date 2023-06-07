@@ -15,8 +15,7 @@ import {
   setCardViewFrontFalse,
   setCardViewFrontTrue,
 } from "../../redux/slices/cards.slice";
-import checkIsDone from "../../hooks/checkIsDone";
-
+import checkIsDone from "../../helpers/checkIsDone";
 
 const CardGame = () => {
   const cardsState = useAppSelector((state) => state.cards);
@@ -27,7 +26,7 @@ const CardGame = () => {
     dispatch(resetAllRedux());
   };
 
-  const resetGametimeOut = () => setTimeout(resetAll, 1500);
+  const resetGametimeOut = () => setTimeout(resetAll, 500);
 
   const resetViewFront = (firstCardId: string, secondCardId: string) => {
     dispatch(setCardViewFrontFalse(firstCardId));
@@ -35,13 +34,13 @@ const CardGame = () => {
   };
 
   const resetViewFrontTimeOut = (firstCardId: string, secondCardId: string) =>
-    setTimeout(() => resetViewFront(firstCardId, secondCardId), 1000);
+    setTimeout(() => resetViewFront(firstCardId, secondCardId), 500);
 
   const { firstCardId, secondCardId, isMatch } = gameState;
 
   const checkIsMatchTrue =
     firstCardId !== null && secondCardId !== null && isMatch === true;
-  
+
   const checkIsMatchFalse =
     firstCardId !== null && secondCardId !== null && isMatch === false;
 
@@ -65,7 +64,7 @@ const CardGame = () => {
       return;
     }
     return;
-  };  
+  };
 
   const settingCards = (value: string, id: string) => {
     if (firstCardId === null) {
@@ -82,16 +81,16 @@ const CardGame = () => {
       return;
     }
   };
-  
+
   const handlesClick = (value: string, id: string) => {
-    const isDone = checkIsDone(id, cardsState)
+    const isDone = checkIsDone(id, cardsState);
     if (isDone) return;
     settingCards(value, id);
   };
-  
+
   useEffect(() => {
     gameFunction();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [gameState.isMatch]);
 
   return (
