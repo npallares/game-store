@@ -141,7 +141,8 @@ export const drabonBallCards: CardState[] = [
   },
 ];
 
-export const initialState: CardState[] = cardsMixer(drabonBallCards);
+//export const initialState: CardState[] = cardsMixer(drabonBallCards);
+export const initialState: CardState[] = drabonBallCards;
 
 export const cardsSlice = createSlice({
   name: "cards",

@@ -1,4 +1,4 @@
-import { CardState } from '../CARD-GAME/context/CardsComponentContext';
+import { CardState } from '../redux/slices/cards.slice';
 
 const cardsMixer = (array:CardState[]) => {
    const shuffledArray = [...array]; // Crear una copia del array para evitar modificar el original
