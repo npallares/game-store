@@ -9,13 +9,13 @@ import {
   setSecondCardRedux,
 } from "../../redux/slices/game.slice";
 import {
-  CardState,
   setCardIsDoneFalse,
   setCardIsDoneTrue,
   setCardViewFrontFalse,
   setCardViewFrontTrue,
 } from "../../redux/slices/cards.slice";
 import checkIsDone from "../../helpers/checkIsDone";
+import { CardState } from "../../types/cards/card_types";
 
 const CardGame = () => {
   const cardsState = useAppSelector((state) => state.cards);

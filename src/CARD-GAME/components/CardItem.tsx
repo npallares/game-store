@@ -1,4 +1,4 @@
-import { CardState } from "../context/CardsComponentContext";
+import { CardState } from "../../types/cards/card_types";
 import { images } from "../../helpers/getImages";
 import styles from "./CardItem.module.css";
 

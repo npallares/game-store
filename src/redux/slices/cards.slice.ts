@@ -1,14 +1,6 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import cardsMixer from "../../helpers/cardsMixer";
-
-export type CardState = {
-  id: string;
-  value: string;
-  frontImg: string;
-  backImg: string;
-  done: null | boolean;
-  ViewFront: boolean | null;
-};
+import { CardState } from "../../types/cards/card_types";
 
 export const drabonBallCards: CardState[] = [
   {
