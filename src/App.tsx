@@ -1,11 +1,16 @@
 import "./App.css";
-import CardGame from "./CARD-GAME/components/CardGame";
-import { Route, Routes } from "react-router-dom";
+import { Link, Route, Routes } from "react-router-dom";
+import PokemonCardGame from "./CARD-GAME/components/PokemonCardGame";
+import DragonBallCardGame from "./CARD-GAME/components/DragonBallCardGame";
 
 const Home = () => {
   return (
     <div>
       <h1>Home</h1>
+      <ul>
+        <li><Link to='/dragonball'>Dragon Ball</Link></li>
+        <li><Link to='/pokemon'>Pokemon</Link></li>
+      </ul>
     </div>
   );
 };
@@ -14,7 +19,8 @@ function App() {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
-      <Route path="/card-game" element={<CardGame />} />
+      <Route path="/dragonball" element={<DragonBallCardGame />} />
+      <Route path="/pokemon" element={<PokemonCardGame />} />
     </Routes>
   );
 }

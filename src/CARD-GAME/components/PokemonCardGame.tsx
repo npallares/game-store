@@ -13,12 +13,12 @@ import {
   setCardIsDoneTrue,
   setCardViewFrontFalse,
   setCardViewFrontTrue,
-} from "../../redux/slices/cards.slice";
+} from "../../redux/slices/pokemonCards.slice";
 import checkIsDone from "../../helpers/checkIsDone";
 import { CardState } from "../../types/cards/card_types";
 
 const CardGame = () => {
-  const cardsState = useAppSelector((state) => state.cards);
+  const cardsState = useAppSelector((state) => state.pokemonCards)
   const gameState = useAppSelector((state) => state.game);
   const dispatch = useAppDispatch();
 

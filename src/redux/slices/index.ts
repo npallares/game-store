@@ -1,2 +1,3 @@
 export { gameSlice } from "./game.slice";
-export { cardsSlice } from "./cards.slice";
+export { dragonballCardsSlice } from "./dragonballCards.slice";
+export { pokemonCardsSlice } from "./pokemonCards.slice";

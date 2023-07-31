@@ -34,6 +34,7 @@ export const gameSlice = createSlice({
   initialState,
   reducers: {
     setFirstCardRedux: (state, action: PayloadAction<SetFirstCard>) => {
+      console.log("nico",state)
       state.firstCard = action.payload.value;
       state.firstCardId = action.payload.id;
     },
