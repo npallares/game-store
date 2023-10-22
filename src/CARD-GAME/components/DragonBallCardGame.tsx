@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect} from "react";
 import styles from "./CardGame.module.css";
 import { CardItem } from "./CardItem";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
@@ -19,7 +19,6 @@ import { CardState } from "../../types/cards/card_types";
 import { useNavigate } from "react-router-dom";
 
 const DragonBallCardGame = () => {
-  const [isOver, setIsOver] = useState(false);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const cardsState = useAppSelector((state) => state.dragonballCards);
@@ -104,7 +103,7 @@ const DragonBallCardGame = () => {
 
   return (
     <>
-      <div>{isOver ? "Game Over" : ""}</div>
+      <div>{"Game Over"}</div>
       <div>
         {cardsState.map((card: CardState) => {
           return (
