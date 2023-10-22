@@ -6,6 +6,8 @@ import {
   setInitialState,
 } from "../../redux/slices/time.slice";
 import { useState } from "react";
+import { setCardsInitialState } from "../../redux/slices/dragonballCards.slice";
+import { setPokemonCardsInitialState } from "../../redux/slices/pokemonCards.slice";
 
 type Status = {
   FINISHED: string;
@@ -23,6 +25,7 @@ const GameOver = () => {
   const [status, setStatus] = useState<string>(STATUS.INICIAL);
   const dispatch = useAppDispatch();
   const timeState = useAppSelector((state) => state.time);
+  //const cardState = useAppSelector((state) => state.dragonballCards);
   const navigate = useNavigate();
 
   const { finalTime } = timeState;
@@ -35,6 +38,8 @@ const GameOver = () => {
     }
     if (status === STATUS.FINISHED) {
       dispatch(setInitialState());
+      dispatch(setCardsInitialState());
+      dispatch(setPokemonCardsInitialState());
       setStatus(STATUS.INICIAL);
       return navigate("/");
     }

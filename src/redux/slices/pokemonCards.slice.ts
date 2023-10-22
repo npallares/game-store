@@ -160,6 +160,9 @@ export const pokemonCardsSlice = createSlice({
       const index = state.findIndex((card) => card.id === action.payload);
       state[index].ViewFront = false;
     },
+    setPokemonCardsInitialState: (state) => {
+      state.map((card) => (card.done = null));
+    },
   },
 });
 
@@ -168,4 +171,5 @@ export const {
   setCardViewFrontFalse,
   setCardIsDoneTrue,
   setCardIsDoneFalse,
+  setPokemonCardsInitialState,
 } = pokemonCardsSlice.actions;

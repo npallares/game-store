@@ -16,9 +16,11 @@ import {
 } from "../../redux/slices/pokemonCards.slice";
 import checkIsDone from "../../helpers/checkIsDone";
 import { CardState } from "../../types/cards/card_types";
+import { useNavigate } from "react-router-dom";
 
 const CardGame = () => {
-  const cardsState = useAppSelector((state) => state.pokemonCards)
+  const cardsState = useAppSelector((state) => state.pokemonCards);
+  const navigate = useNavigate();
   const gameState = useAppSelector((state) => state.game);
   const dispatch = useAppDispatch();
 
@@ -31,6 +33,11 @@ const CardGame = () => {
   const resetViewFront = (firstCardId: string, secondCardId: string) => {
     dispatch(setCardViewFrontFalse(firstCardId));
     dispatch(setCardViewFrontFalse(secondCardId));
+  };
+
+  const gameOver = () => {
+    const isOver = cardsState.every((card) => card.done === true);
+    return isOver ? navigate("/gameover") : false;
   };
 
   const resetViewFrontTimeOut = (firstCardId: string, secondCardId: string) =>
@@ -89,6 +96,7 @@ const CardGame = () => {
   };
 
   useEffect(() => {
+    gameOver();
     gameFunction();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [gameState.isMatch]);

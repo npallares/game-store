@@ -291,6 +291,9 @@ export const dragonballCardsSlice = createSlice({
       const index = state.findIndex((card) => card.id === action.payload);
       state[index].ViewFront = false;
     },
+    setCardsInitialState: (state) => {
+      state.map((card) => (card.done = null));
+    },
   },
 });
 
@@ -299,4 +302,5 @@ export const {
   setCardViewFrontFalse,
   setCardIsDoneTrue,
   setCardIsDoneFalse,
+  setCardsInitialState,
 } = dragonballCardsSlice.actions;
