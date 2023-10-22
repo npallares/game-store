@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import styles from "./CardGame.module.css";
 import { CardItem } from "./CardItem";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
@@ -16,11 +16,14 @@ import {
 } from "../../redux/slices/dragonballCards.slice";
 import checkIsDone from "../../helpers/checkIsDone";
 import { CardState } from "../../types/cards/card_types";
+import { useNavigate } from "react-router-dom";
 
 const DragonBallCardGame = () => {
+  const [isOver, setIsOver] = useState(false);
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const cardsState = useAppSelector((state) => state.dragonballCards);
   const gameState = useAppSelector((state) => state.game);
-  const dispatch = useAppDispatch();
 
   const resetAll = () => {
     dispatch(resetAllRedux());
@@ -31,6 +34,11 @@ const DragonBallCardGame = () => {
   const resetViewFront = (firstCardId: string, secondCardId: string) => {
     dispatch(setCardViewFrontFalse(firstCardId));
     dispatch(setCardViewFrontFalse(secondCardId));
+  };
+
+  const gameOver = () => {
+    const isOver = cardsState.every((card) => card.done === true);
+    return isOver ? navigate("/gameover") : false;
   };
 
   const resetViewFrontTimeOut = (firstCardId: string, secondCardId: string) =>
@@ -89,24 +97,28 @@ const DragonBallCardGame = () => {
   };
 
   useEffect(() => {
+    gameOver();
     gameFunction();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [gameState.isMatch]);
 
   return (
-    <div>
-      {cardsState.map((card: CardState) => {
-        return (
-          <button
-            key={card.id}
-            className={styles.cardButton}
-            onClick={() => handlesClick(card.value, card.id)}
-          >
-            <CardItem card={card} />
-          </button>
-        );
-      })}
-    </div>
+    <>
+      <div>{isOver ? "Game Over" : ""}</div>
+      <div>
+        {cardsState.map((card: CardState) => {
+          return (
+            <button
+              key={card.id}
+              className={styles.cardButton}
+              onClick={() => handlesClick(card.value, card.id)}
+            >
+              <CardItem card={card} />
+            </button>
+          );
+        })}
+      </div>
+    </>
   );
 };
 
