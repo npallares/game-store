@@ -8,10 +8,10 @@ import Home from "./CARD-GAME/views/Home";
 function App() {
   return (
     <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/gameover" element={<GameOver />} />
+      <Route path="/" element={<Home/>} />
       <Route path="/dragonball" element={<DragonBallCardGame />} />
       <Route path="/pokemon" element={<PokemonCardGame />} />
+      <Route path="/gameover" element={<GameOver />} />
     </Routes>
   );
 }

@@ -5,7 +5,7 @@ import {
   setFinishedTimestamp,
   setInitialState,
 } from "../../redux/slices/time.slice";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { setCardsInitialState } from "../../redux/slices/dragonballCards.slice";
 import { setPokemonCardsInitialState } from "../../redux/slices/pokemonCards.slice";
 
@@ -30,19 +30,15 @@ const GameOver = () => {
 
   const { finalTime } = timeState;
 
+  useEffect(() => {
+    dispatch(setCardsInitialState());
+    dispatch(setPokemonCardsInitialState());
+    dispatch(getFinalTime());
+    dispatch(setFinishedTimestamp());
+  });
+
   const handleClick = () => {
-    if (status === STATUS.INICIAL) {
-      dispatch(setFinishedTimestamp());
-      dispatch(getFinalTime());
-      return setStatus(STATUS.FINISHED);
-    }
-    if (status === STATUS.FINISHED) {
-      dispatch(setInitialState());
-      dispatch(setCardsInitialState());
-      dispatch(setPokemonCardsInitialState());
-      setStatus(STATUS.INICIAL);
-      return navigate("/");
-    }
+    return navigate("/");
   };
   return (
     <div
@@ -68,7 +64,7 @@ const GameOver = () => {
         name="button"
         style={{ width: "150px", height: "50px", border: "2px solid grey" }}
       >
-        {status === STATUS.INICIAL ? "Finish" : "Restart"}
+        {"Restart"}
       </button>
     </div>
   );

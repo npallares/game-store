@@ -3,15 +3,19 @@
   height: 100vh;
   display: flex;
   flex-direction: column;
-  border: 1px solid red;
   justify-content: start;
   align-items: flex-start;
 }
 
 .heading {
-  height: 30%;
+  height: 10%;
   width: 100%;
-  border: 1px solid blue;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 15px;
+  background-color: rgb(246, 246, 246);
+  border: 1px solid rgb(214, 214, 214);
 }
 
 .body {
@@ -24,5 +28,8 @@
 }
 
 .cardContainer {
-    
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
 }
