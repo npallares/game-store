@@ -1,4 +1,16 @@
-import { CardState } from "../../types/cards/card_types";
+import { CardState } from "../../../types/cards/card_types";
+
+const dragonBallImages = {
+  goku: "img/goku.jpg",
+  krilin: "img/krilin.jpg",
+  vegeta: "img/vegeta.jpg",
+  gohan: "img/gohan.jpg",
+  picoro: "img/picoro.jpg",
+  trunks: "img/trunks.jpg",
+  bulma: "img/bulma.jpg",
+  roshi: "img/roshi.jpg",
+  background: "dragonBall",
+};
 
 export const drabonBallCards: CardState[] = [
   {

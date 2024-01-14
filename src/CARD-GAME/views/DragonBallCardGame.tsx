@@ -103,7 +103,6 @@ const DragonBallCardGame = () => {
 
   return (
     <>
-      <div>{"Game Over"}</div>
       <div>
         {cardsState.map((card: CardState) => {
           return (

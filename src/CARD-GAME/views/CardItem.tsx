@@ -1,23 +1,30 @@
 import { CardState } from "../../types/cards/card_types";
-import { images } from "../../helpers/getImages";
 import styles from "./CardItem.module.css";
+import { getBackImg, getFrontImg } from "./utils/cardItemUtils";
 
 export const CardItem = ({ card }: { card: CardState }) => {
-  const { id, value, done, ViewFront, backImg } = card;
+  const { id, done, ViewFront, backImg } = card;
+  
+  const isDone = done;
+  const reference = backImg;
+  const style = isDone ? styles.done : styles.inGame;
 
-  if (done === true || ViewFront === true) {
-    const FrontStyle = done ? styles.done : styles.ViewFront;
 
+  const images = {
+    frontImg: getFrontImg(reference, card),
+    backImg: getBackImg(reference),
+  };
+
+  if (isDone || ViewFront === true) {
     return (
-      <div className={`${styles.cardContenier} ${FrontStyle}`}>
-        <img src={images[value]} alt={id} />
+      <div className={`${styles.cardContenier} ${style}`}>
+        <img src={images.frontImg} alt={id} />
       </div>
     );
   }
-
   return (
-    <div className={`${styles.cardContenier}`}>
-      <img src={images[backImg]} alt={id} />
+    <div className={`${styles.cardContenier} ${style}`}>
+      <img src={images.backImg} alt={id} />
     </div>
   );
 };

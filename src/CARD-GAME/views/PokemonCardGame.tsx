@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import styles from "./CardGame.module.css";
+import styles2 from "./pokemonCardGame.module.css";
 import { CardItem } from "./CardItem";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import {
@@ -19,7 +20,7 @@ import { CardState } from "../../types/cards/card_types";
 import { useNavigate } from "react-router-dom";
 
 const CardGame = () => {
-  const cardsState = useAppSelector((state) => state.pokemonCards);
+  const cards = useAppSelector((state) => state.pokemonCards);
   const navigate = useNavigate();
   const gameState = useAppSelector((state) => state.game);
   const dispatch = useAppDispatch();
@@ -36,7 +37,7 @@ const CardGame = () => {
   };
 
   const gameOver = () => {
-    const isOver = cardsState.every((card) => card.done === true);
+    const isOver = cards.every((card) => card.done === true);
     return isOver ? navigate("/gameover") : false;
   };
 
@@ -90,7 +91,7 @@ const CardGame = () => {
   };
 
   const handlesClick = (value: string, id: string) => {
-    const isDone = checkIsDone(id, cardsState);
+    const isDone = checkIsDone(id, cards);
     if (isDone) return;
     settingCards(value, id);
   };
@@ -102,8 +103,8 @@ const CardGame = () => {
   }, [gameState.isMatch]);
 
   return (
-    <div>
-      {cardsState.map((card: CardState) => {
+    <div className={styles.container}>
+      {cards.map((card: CardState) => {
         return (
           <button
             key={card.id}

@@ -4,7 +4,8 @@
   align-items: center;
   cursor: pointer;
   object-fit: cover;
-  height: 100%;
+  height: 300px;
+  border: 25px solid rgb(8, 19, 184);
 }
 
 .cardContenier img {
@@ -17,6 +18,6 @@
   border: 2px solid red;
 }
 
-.ViewFront {
+.inGame {
   border: 2px solid rgb(0, 168, 0);
 }
