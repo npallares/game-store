@@ -1,5 +1,5 @@
 import { CardState } from "../../types/cards/card_types";
-import styles from "./CardItem.module.css";
+import styles from "./cardItem.module.css";
 import { getBackImg, getFrontImg } from "./utils/cardItemUtils";
 
 export const CardItem = ({ card }: { card: CardState }) => {
