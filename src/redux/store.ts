@@ -1,16 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
 import timeSlice from "./slices/time.slice";
-import {
-  dragonballCardsSlice,
-  gameSlice,
-  pokemonCardsSlice,
-} from "./slices";
+import { gameSlice } from "./slices";
+import { cardsSlice } from "./slices/cards.slice";
 
 export const store = configureStore({
   reducer: {
     game: gameSlice.reducer,
-    dragonballCards: dragonballCardsSlice.reducer,
-    pokemonCards: pokemonCardsSlice.reducer,
+    cards: cardsSlice.reducer,
     time: timeSlice,
   },
 });

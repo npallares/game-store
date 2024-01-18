@@ -39,7 +39,7 @@ const Card = ({ theme }: Props): JSX.Element => {
 
   const handleClick = (theme: string) => {
     dispatch(setInitialTimestamp());
-    navigate(`/${theme}`);
+    navigate(`/:${theme}`);
   };
 
   return (

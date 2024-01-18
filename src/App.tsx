@@ -1,7 +1,6 @@
 import "./App.css";
 import { Route, Routes } from "react-router-dom";
-import PokemonCardGame from "./CARD-GAME/views/PokemonCardGame";
-import DragonBallCardGame from "./CARD-GAME/views/DragonBallCardGame";
+import CardGame from "./CARD-GAME/views/cardGame";
 import GameOver from "./CARD-GAME/views/GameOver";
 import Home from "./CARD-GAME/views/Home";
 
@@ -9,8 +8,7 @@ function App() {
   return (
     <Routes>
       <Route path="/" element={<Home/>} />
-      <Route path="/dragonball" element={<DragonBallCardGame />} />
-      <Route path="/pokemon" element={<PokemonCardGame />} />
+      <Route path="/:theme" element={<CardGame />} />
       <Route path="/gameover" element={<GameOver />} />
     </Routes>
   );

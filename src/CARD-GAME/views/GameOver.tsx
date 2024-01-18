@@ -3,26 +3,11 @@ import { useNavigate } from "react-router-dom";
 import {
   getFinalTime,
   setFinishedTimestamp,
-  setInitialState,
 } from "../../redux/slices/time.slice";
-import { useEffect, useState } from "react";
-import { setCardsInitialState } from "../../redux/slices/dragonballCards.slice";
-import { setPokemonCardsInitialState } from "../../redux/slices/pokemonCards.slice";
-
-type Status = {
-  FINISHED: string;
-  RESTART: string;
-  INICIAL: string;
-};
-
-const STATUS: Status = {
-  FINISHED: "finished",
-  RESTART: "restart",
-  INICIAL: "inicial",
-};
+import { useEffect } from "react";
+import { setCardsInitialState } from "../../redux/slices/cards.slice";
 
 const GameOver = () => {
-  const [status, setStatus] = useState<string>(STATUS.INICIAL);
   const dispatch = useAppDispatch();
   const timeState = useAppSelector((state) => state.time);
   //const cardState = useAppSelector((state) => state.dragonballCards);
@@ -32,7 +17,6 @@ const GameOver = () => {
 
   useEffect(() => {
     dispatch(setCardsInitialState());
-    dispatch(setPokemonCardsInitialState());
     dispatch(getFinalTime());
     dispatch(setFinishedTimestamp());
   });

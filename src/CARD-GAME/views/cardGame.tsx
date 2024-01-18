@@ -1,6 +1,5 @@
 import { useEffect } from "react";
-import styles from "./CardGame.module.css";
-import styles2 from "./pokemonCardGame.module.css";
+import styles from "./cardGame.module.css";
 import { CardItem } from "./CardItem";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import {
@@ -14,16 +13,23 @@ import {
   setCardIsDoneTrue,
   setCardViewFrontFalse,
   setCardViewFrontTrue,
-} from "../../redux/slices/pokemonCards.slice";
+} from "../../redux/slices/cards.slice";
 import checkIsDone from "../../helpers/checkIsDone";
 import { CardState } from "../../types/cards/card_types";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import { setCards } from "../../redux/slices/cards.slice";
 
 const CardGame = () => {
-  const cards = useAppSelector((state) => state.pokemonCards);
+  const { theme } = useParams();
+  console.log("Nicolas params", theme);
+  const cardsStatus = useAppSelector((state) => state.cards.status);
+  const cards = useAppSelector((state) => state.cards.cards);
   const navigate = useNavigate();
   const gameState = useAppSelector((state) => state.game);
   const dispatch = useAppDispatch();
+
+  const { firstCardId, secondCardId, isMatch } = gameState;
+
 
   const resetAll = () => {
     dispatch(resetAllRedux());
@@ -44,7 +50,6 @@ const CardGame = () => {
   const resetViewFrontTimeOut = (firstCardId: string, secondCardId: string) =>
     setTimeout(() => resetViewFront(firstCardId, secondCardId), 500);
 
-  const { firstCardId, secondCardId, isMatch } = gameState;
 
   const checkIsMatchTrue =
     firstCardId !== null && secondCardId !== null && isMatch === true;
@@ -73,7 +78,7 @@ const CardGame = () => {
     }
     return;
   };
-
+  
   const settingCards = (value: string, id: string) => {
     if (firstCardId === null) {
       dispatch(setFirstCardRedux({ value, id }));
@@ -95,6 +100,11 @@ const CardGame = () => {
     if (isDone) return;
     settingCards(value, id);
   };
+
+  useEffect(() => {
+    if (!theme || cardsStatus !== "Uninitialized") return;
+    dispatch(setCards(theme));
+  }, [cardsStatus]);
 
   useEffect(() => {
     gameOver();
