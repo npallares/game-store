@@ -1,11 +1,11 @@
-import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+import { useAppDispatch, useAppSelector } from "../../state/hooks";
 import { useNavigate } from "react-router-dom";
 import {
   getFinalTime,
   setFinishedTimestamp,
-} from "../../redux/slices/time.slice";
+} from "../../state/slices/time.slice";
 import { useEffect } from "react";
-import { setCardsInitialState } from "../../redux/slices/cards.slice";
+import { setCardsInitialState } from "../../state/slices/cards.slice";
 
 const GameOver = () => {
   const dispatch = useAppDispatch();

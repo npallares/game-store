@@ -6,10 +6,9 @@ import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
 import { THEME } from "../../helpers/config";
-import { setCardsInitialState } from "../../redux/slices/cards.slice";
+import { setCardsInitialState } from "../../state/slices/cards.slice";
 import { useEffect } from "react";
-import { useAppDispatch } from "../../redux/hooks";
-
+import { useAppDispatch } from "../../state/hooks";
 
 const Home = () => {
   const dispatch = useAppDispatch();

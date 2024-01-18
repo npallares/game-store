@@ -1,8 +1,8 @@
 import Button from "@mui/material/Button";
 import styles from "./Card.module.css";
 import { useNavigate } from "react-router-dom";
-import { useAppDispatch } from "../../../redux/hooks";
-import { setInitialTimestamp } from "../../../redux/slices/time.slice";
+import { useAppDispatch } from "../../../state/hooks";
+import { setInitialTimestamp } from "../../../state/slices/time.slice";
 import DragonBallImage from "./../../../../public/cardsImages/drabonballIcon.png";
 import PokemonImage from "./../../../../public/cardsImages/pokemonIcon.png";
 import DefaultImage from "./../../../../public/cardsImages/defaultImagen.png";
@@ -35,7 +35,7 @@ const Card = ({ theme }: Props): JSX.Element => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  const isOther = theme === THEME.OTHER 
+  const isOther = theme === THEME.OTHER;
 
   const handleClick = (theme: string) => {
     dispatch(setInitialTimestamp());
@@ -49,14 +49,9 @@ const Card = ({ theme }: Props): JSX.Element => {
       </span>
       <span className={styles.buttonSection}>
         {isOther ? (
-          <Button
-            variant="contained"
-            size="large"
-            disabled
-          >
+          <Button variant="contained" size="large" disabled>
             {theme}
           </Button>
-            
         ) : (
           <Button
             variant="contained"

@@ -1,23 +1,23 @@
 import { useEffect } from "react";
 import styles from "./cardGame.module.css";
 import { CardItem } from "./CardItem";
-import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+import { useAppDispatch, useAppSelector } from "../../state/hooks";
 import {
   resetAllRedux,
   setFirstCardRedux,
   setIsMatchRedux,
   setSecondCardRedux,
-} from "../../redux/slices/game.slice";
+} from "../../state/slices/game.slice";
 import {
   setCardIsDoneFalse,
   setCardIsDoneTrue,
   setCardViewFrontFalse,
   setCardViewFrontTrue,
-} from "../../redux/slices/cards.slice";
+} from "../../state/slices/cards.slice";
 import checkIsDone from "../../helpers/checkIsDone";
 import { CardState } from "../../types/cards/card_types";
 import { useNavigate, useParams } from "react-router-dom";
-import { setCards } from "../../redux/slices/cards.slice";
+import { setCards } from "../../state/slices/cards.slice";
 
 const CardGame = () => {
   const { theme } = useParams();
@@ -29,7 +29,6 @@ const CardGame = () => {
   const dispatch = useAppDispatch();
 
   const { firstCardId, secondCardId, isMatch } = gameState;
-
 
   const resetAll = () => {
     dispatch(resetAllRedux());
@@ -49,7 +48,6 @@ const CardGame = () => {
 
   const resetViewFrontTimeOut = (firstCardId: string, secondCardId: string) =>
     setTimeout(() => resetViewFront(firstCardId, secondCardId), 500);
-
 
   const checkIsMatchTrue =
     firstCardId !== null && secondCardId !== null && isMatch === true;
@@ -78,7 +76,7 @@ const CardGame = () => {
     }
     return;
   };
-  
+
   const settingCards = (value: string, id: string) => {
     if (firstCardId === null) {
       dispatch(setFirstCardRedux({ value, id }));
