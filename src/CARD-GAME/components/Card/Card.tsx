@@ -3,10 +3,8 @@ import styles from "./Card.module.css";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../../../state/hooks";
 import { setInitialTimestamp } from "../../../state/slices/time.slice";
-import DragonBallImage from "./../../../../public/cardsImages/drabonballIcon.png";
-import PokemonImage from "./../../../../public/cardsImages/pokemonIcon.png";
-import DefaultImage from "./../../../../public/cardsImages/defaultImagen.png";
 import { THEME } from "../../../helpers/config";
+import getImage from "../../../helpers/getImage";
 
 export enum ImagesProps {
   POKEMON = "../../../public/cardsImages/pokemonIcon.png",
@@ -17,19 +15,6 @@ export enum ImagesProps {
 interface Props {
   theme: string;
 }
-
-const getImage = (theme: string) => {
-  switch (theme) {
-    case THEME.POKEMON:
-      return PokemonImage;
-
-    case THEME.DRAGONBALL:
-      return DragonBallImage;
-
-    default:
-      return DefaultImage;
-  }
-};
 
 const Card = ({ theme }: Props): JSX.Element => {
   const dispatch = useAppDispatch();

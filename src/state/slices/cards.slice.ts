@@ -63,7 +63,8 @@ export const cardsSlice = createSlice({
       state.cards[index].ViewFront = false;
     },
     setCardsInitialState: (state) => {
-      state.cards.map((card) => (card.done = null));
+      //state.cards.map((card) => (card.done = null));
+      state.cards = initialState.cards;
       state.status = LoadingStatus.Uninitialized;
     },
   },

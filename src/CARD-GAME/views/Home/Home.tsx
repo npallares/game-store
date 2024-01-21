@@ -1,14 +1,14 @@
 import styles from "./Home.module.css";
 import Typography from "@mui/material/Typography";
-import Card from "../components/Card/Card";
+import Card from "../../components/Card/Card";
 import "@fontsource/roboto/300.css";
 import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
-import { THEME } from "../../helpers/config";
-import { setCardsInitialState } from "../../state/slices/cards.slice";
+import { THEME } from "../../../helpers/config";
+import { setCardsInitialState } from "../../../state/slices/cards.slice";
 import { useEffect } from "react";
-import { useAppDispatch } from "../../state/hooks";
+import { useAppDispatch } from "../../../state/hooks";
 
 const Home = () => {
   const dispatch = useAppDispatch();

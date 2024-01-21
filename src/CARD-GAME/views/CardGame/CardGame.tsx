@@ -1,27 +1,26 @@
 import { useEffect } from "react";
 import styles from "./cardGame.module.css";
-import { CardItem } from "./CardItem";
-import { useAppDispatch, useAppSelector } from "../../state/hooks";
+import { CardItem } from "../../components/CardItem/CardItem";
+import { useAppDispatch, useAppSelector } from "../../../state/hooks";
 import {
   resetAllRedux,
   setFirstCardRedux,
   setIsMatchRedux,
   setSecondCardRedux,
-} from "../../state/slices/game.slice";
+} from "../../../state/slices/game.slice";
 import {
   setCardIsDoneFalse,
   setCardIsDoneTrue,
   setCardViewFrontFalse,
   setCardViewFrontTrue,
-} from "../../state/slices/cards.slice";
-import checkIsDone from "../../helpers/checkIsDone";
-import { CardState } from "../../types/cards/card_types";
+} from "../../../state/slices/cards.slice";
+import checkIsDone from "../../../helpers/checkIsDone";
+import { CardState } from "../../../types/cards/card_types";
 import { useNavigate, useParams } from "react-router-dom";
-import { setCards } from "../../state/slices/cards.slice";
+import { setCards } from "../../../state/slices/cards.slice";
 
 const CardGame = () => {
   const { theme } = useParams();
-  console.log("Nicolas params", theme);
   const cardsStatus = useAppSelector((state) => state.cards.status);
   const cards = useAppSelector((state) => state.cards.cards);
   const navigate = useNavigate();
@@ -102,27 +101,34 @@ const CardGame = () => {
   useEffect(() => {
     if (!theme || cardsStatus !== "Uninitialized") return;
     dispatch(setCards(theme));
+    // MEJORA SACAR ESLINT-DISABLE
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [cardsStatus]);
 
   useEffect(() => {
     gameOver();
     gameFunction();
+    // MEJORA SACAR ESLINT-DISABLE
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [gameState.isMatch]);
 
   return (
-    <div className={styles.container}>
-      {cards.map((card: CardState) => {
-        return (
-          <button
-            key={card.id}
-            className={styles.cardButton}
-            onClick={() => handlesClick(card.value, card.id)}
-          >
-            <CardItem card={card} />
-          </button>
-        );
-      })}
+    <div className={styles.background}>
+      <div className={styles.container}>
+        {cards.map((card: CardState) => {
+          return (
+            <div className={styles.cardContainer} key={card.id}>
+              <button
+                key={card.id}
+                className={styles.cardButton}
+                onClick={() => handlesClick(card.value, card.id)}
+              >
+                <CardItem card={card} />
+              </button>
+           </div>
+          );
+        })}
+      </div>
     </div>
   );
 };

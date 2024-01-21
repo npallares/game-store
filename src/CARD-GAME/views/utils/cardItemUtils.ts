@@ -20,10 +20,10 @@ export const getFrontImg = (reference: string, card: CardState) => {
 
 export const getBackImg = (reference: string) => {
   switch (reference) {
-    case "pokemon":
+    case POKEMON:
       return pokemonImages[POKEMON];
 
-    case "drgonball":
+    case DRAGONBALL:
       return dragonBallImages[DRAGONBALL];
 
     default:

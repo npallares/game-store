@@ -1,0 +1,32 @@
+.cardContainer {
+  display: flex;
+  width: 100px;
+  height:150px;
+  margin: 0 5px;
+  flex-wrap: nowrap;
+  box-shadow: 50px;
+}
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 80%;
+  height: 400px;
+  flex-wrap: wrap;
+}
+
+.cardButton {
+  min-height: auto;
+  max-height: auto;
+  min-width:auto;
+  max-width: auto;
+  border-radius: 10px;
+}
+
+.background{
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  height: 98vh;
+  
+}

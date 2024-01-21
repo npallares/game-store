@@ -20,7 +20,6 @@ interface SetSecondCard {
   value: string | null;
 }
 
-
 const initialState: GameStateReducer = {
   firstCard: null,
   firstCardId: null,
