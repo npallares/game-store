@@ -7,6 +7,7 @@ import {
   setFirstCardRedux,
   setIsMatchRedux,
   setSecondCardRedux,
+  setIsDone
 } from "../../../state/slices/game.slice";
 import {
   setCardIsDoneFalse,
@@ -42,7 +43,7 @@ const Game = () => {
 
   const gameOver = () => {
     const isOver = cards.every((card) => card.done === true);
-    return isOver ? navigate("/gameover") : false;
+    return isOver ? /* navigate("/gameover") */ dispatch(setIsDone()) : false;
   };
 
   const resetViewFrontTimeOut = (firstCardId: string, secondCardId: string) =>
@@ -133,3 +134,4 @@ const Game = () => {
 };
 
 export default Game;
+
