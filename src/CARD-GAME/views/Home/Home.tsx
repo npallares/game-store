@@ -1,6 +1,6 @@
-import styles from "./Home.module.css";
+import styles from "./home.module.scss";
 import Typography from "@mui/material/Typography";
-import Card from "../../components/Card/Card";
+import Card from "../../components/HomeCard/HomeCard";
 import "@fontsource/roboto/300.css";
 import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";

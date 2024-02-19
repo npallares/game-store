@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import styles from "./cardGame.module.css";
+import styles from "./game.module.scss";
 import { CardItem } from "../../components/CardItem/CardItem";
 import { useAppDispatch, useAppSelector } from "../../../state/hooks";
 import {
@@ -19,7 +19,7 @@ import { CardState } from "../../../types/cards/card_types";
 import { useNavigate, useParams } from "react-router-dom";
 import { setCards } from "../../../state/slices/cards.slice";
 
-const CardGame = () => {
+const Game = () => {
   const { theme } = useParams();
   const cardsStatus = useAppSelector((state) => state.cards.status);
   const cards = useAppSelector((state) => state.cards.cards);
@@ -117,15 +117,14 @@ const CardGame = () => {
       <div className={styles.container}>
         {cards.map((card: CardState) => {
           return (
-            <div className={styles.cardContainer} key={card.id}>
-              <button
-                key={card.id}
-                className={styles.cardButton}
-                onClick={() => handlesClick(card.value, card.id)}
-              >
-                <CardItem card={card} />
-              </button>
-           </div>
+            <div
+              role="button"
+              key={card.id}
+              className={`${styles.cardContainer}`}
+              onClick={() => handlesClick(card.value, card.id)}
+            >
+              <CardItem card={card} />
+            </div>
           );
         })}
       </div>
@@ -133,4 +132,4 @@ const CardGame = () => {
   );
 };
 
-export default CardGame;
+export default Game;

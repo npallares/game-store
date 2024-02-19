@@ -1,5 +1,5 @@
 import Button from "@mui/material/Button";
-import styles from "./Card.module.css";
+import styles from "./homeCard.module.scss";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../../../state/hooks";
 import { setInitialTimestamp } from "../../../state/slices/time.slice";
@@ -16,7 +16,7 @@ interface Props {
   theme: string;
 }
 
-const Card = ({ theme }: Props): JSX.Element => {
+const GameCard = ({ theme }: Props): JSX.Element => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
@@ -51,4 +51,4 @@ const Card = ({ theme }: Props): JSX.Element => {
   );
 };
 
-export default Card;
+export default GameCard;
