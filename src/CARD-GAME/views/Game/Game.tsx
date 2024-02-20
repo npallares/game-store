@@ -7,7 +7,7 @@ import {
   setFirstCardRedux,
   setIsMatchRedux,
   setSecondCardRedux,
-  setIsDone
+  setIsDone,
 } from "../../../state/slices/game.slice";
 import {
   setCardIsDoneFalse,
@@ -19,6 +19,7 @@ import checkIsDone from "../../../helpers/checkIsDone";
 import { CardState } from "../../../types/cards/card_types";
 import { useNavigate, useParams } from "react-router-dom";
 import { setCards } from "../../../state/slices/cards.slice";
+import { addStep } from "../../../state/slices/steps.slice";
 
 const Game = () => {
   const { theme } = useParams();
@@ -63,11 +64,13 @@ const Game = () => {
       if (checkIsMatchTrue) {
         dispatch(setCardIsDoneTrue(firstCardId));
         dispatch(setCardIsDoneTrue(secondCardId));
+        dispatch(addStep());
         resetViewFrontTimeOut(firstCardId, secondCardId);
         resetGametimeOut();
         return;
       }
       if (checkIsMatchFalse) {
+        dispatch(addStep());
         resetViewFrontTimeOut(firstCardId, secondCardId);
         resetGametimeOut();
         return;
@@ -134,4 +137,3 @@ const Game = () => {
 };
 
 export default Game;
-

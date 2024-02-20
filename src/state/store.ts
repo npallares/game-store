@@ -1,6 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 import timeSlice from "./slices/time.slice";
-import { gameSlice } from "./slices";
+import { gameSlice, stepsSlice } from "./slices";
 import { cardsSlice } from "./slices/cards.slice";
 
 export const store = configureStore({
@@ -8,6 +8,7 @@ export const store = configureStore({
     game: gameSlice.reducer,
     cards: cardsSlice.reducer,
     time: timeSlice,
+    steps: stepsSlice.reducer,
   },
 });
 
