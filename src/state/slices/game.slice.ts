@@ -52,7 +52,7 @@ export const gameSlice = createSlice({
       if (!isMatch) state.isMatch = false;
     },
     setIsDone: (state) => {
-      state.isDone = true;
+      state.isDone = !state.isDone;
     },
     resetAllRedux: (state) => {
       state.firstCard = null;

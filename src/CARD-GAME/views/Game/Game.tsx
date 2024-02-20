@@ -24,9 +24,9 @@ const Game = () => {
   const { theme } = useParams();
   const cardsStatus = useAppSelector((state) => state.cards.status);
   const cards = useAppSelector((state) => state.cards.cards);
-  const navigate = useNavigate();
   const gameState = useAppSelector((state) => state.game);
   const dispatch = useAppDispatch();
+  //const navigate = useNavigate();
 
   const { firstCardId, secondCardId, isMatch } = gameState;
 
