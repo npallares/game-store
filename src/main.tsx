@@ -5,12 +5,16 @@ import "./styles/index.css";
 import { Provider } from "react-redux";
 import { store } from "./state/store.ts";
 import { BrowserRouter } from "react-router-dom";
+import { ThemeProvider } from "@mui/material";
+import { getMuiTheme } from "./styles/muiTheme.ts";
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
     <Provider store={store}>
       <BrowserRouter>
-        <App />
+        <ThemeProvider theme={getMuiTheme()}>
+          <App />
+        </ThemeProvider>
       </BrowserRouter>
     </Provider>
   </React.StrictMode>
