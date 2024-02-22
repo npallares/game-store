@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect } from "react";
 import styles from "./game.module.scss";
 import { CardItem } from "../CARD-GAME/components/CardItem/CardItem";
@@ -10,22 +11,25 @@ import {
   setIsDone,
 } from "../state/slices/game.slice";
 import {
+  selectGameCards,
+  selectGameCardsStatus,
   setCardIsDoneFalse,
   setCardIsDoneTrue,
   setCardViewFrontFalse,
   setCardViewFrontTrue,
-} from "../state/slices/cards.slice";
-import checkIsDone from "../helpers/checkIsDone";
-import { CardState } from "../types/cards/card_types";
+} from "../state/slices/gameCards.slice";
+import checkIsDone from "../utils/checkIsDone";
+import type { GameCard } from "../types/cards/card_types";
 import { useParams } from "react-router-dom";
-import { setCards } from "../state/slices/cards.slice";
+import { setCards } from "../state/slices/gameCards.slice";
 import { addStep } from "../state/slices/steps.slice";
+import { STATUS } from "../enums/status";
 
 const Game = () => {
   const { theme } = useParams();
   const dispatch = useAppDispatch();
-  const cardsStatus = useAppSelector((state) => state.cards.status);
-  const cards = useAppSelector((state) => state.cards.cards);
+  const cardsStatus = useAppSelector(selectGameCardsStatus);
+  const cards = useAppSelector(selectGameCards);
   const gameState = useAppSelector((state) => state.game);
   //const navigate = useNavigate();
 
@@ -103,23 +107,19 @@ const Game = () => {
   };
 
   useEffect(() => {
-    if (!theme || cardsStatus !== "Uninitialized") return;
+    if (!theme || cardsStatus !== STATUS.UNINITIALIZED) return;
     dispatch(setCards(theme));
-    // MEJORA SACAR ESLINT-DISABLE
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [cardsStatus]);
 
   useEffect(() => {
     gameOver();
     gameFunction();
-    // MEJORA SACAR ESLINT-DISABLE
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [gameState.isMatch]);
 
   return (
     <div className={styles.background}>
       <div className={styles.container}>
-        {cards.map((card: CardState) => {
+        {cards.map((card: GameCard) => {
           return (
             <div
               role="button"

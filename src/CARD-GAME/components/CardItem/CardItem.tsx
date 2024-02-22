@@ -1,9 +1,13 @@
-import { CardState } from "../../../types/cards/card_types";
-import getBackImg from "../../../utils/cardItemUtils";
+import { GameCard } from "../../../types/cards/card_types";
+import getBackImg from "../../../utils/getBackImg";
 import getFrontImg from "../../../utils/getFrontImg";
 import styles from "./cardItem.module.scss";
 
-export const CardItem = ({ card }: { card: CardState }) => {
+interface CardItemProps {
+  card: GameCard;
+}
+
+export const CardItem = ({ card }: CardItemProps) => {
   const { id, done, ViewFront, backImg } = card;
 
   const isDone = done;

@@ -1,4 +1,4 @@
-export enum Status {
+export enum STATUS {
   UNINITIALIZED = "uninitialized",
   LOADING = "loading",
   LOADED = "loaded",

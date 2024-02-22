@@ -9,7 +9,7 @@ interface TriviaCardProps {
 }
 
 const TriviaCard: React.FC<TriviaCardProps> = ({
-  image,
+  image = 'hola',
   value,
   id,
   onClick,

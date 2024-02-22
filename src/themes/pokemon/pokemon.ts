@@ -1,4 +1,4 @@
-import { CardState } from "../../../types/cards/card_types";
+import { GameCard } from "../../types/cards/card_types";
 
 const pokemonImages = {
   pikachu: "img/pikachu.jpg",
@@ -12,7 +12,7 @@ const pokemonImages = {
   background: "pokemon",
 };
 
-export const pokemonCards: CardState[] = [
+export const pokemonCards: GameCard[] = [
   {
     id: "pikachu01",
     value: "pikachu",

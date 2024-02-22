@@ -13,9 +13,9 @@ function App() {
       <Routes>
         <Route path="/" element={<ModalService />}>
           <Route index element={<Home />} />
-          <Route path="/:theme" element={<Game />} />
+          <Route path="/cardsGame/:theme" element={<Game />} />
           <Route path="/material" element={<Material />} />
-          <Route path="/trivia" element={<TriviaGame />} />
+          <Route path="/trivia/:theme" element={<TriviaGame />} />
         </Route>
       </Routes>
     </React.StrictMode>

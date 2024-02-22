@@ -1,4 +1,4 @@
-export enum TriviaCardIds {
+export enum OPTIONS {
   ONE = "one",
   TWO = "two",
   THREE = "three",

@@ -1,23 +1,18 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import cardsMixer from "../../helpers/cardsMixer";
-import { CardState } from "../../types/cards/card_types";
-import { drabonBallCards } from "../../CARD-GAME/themes/dragon-ball/dragon-ball";
-import { pokemonCards } from "../../CARD-GAME/themes/pokemon/pokemon";
+import cardsMixer from "../../utils/cardsMixer";
+import { GameCard } from "../../types/cards/card_types";
+import { RootState } from "../store";
+import { STATUS } from "../../enums/status";
+import { pokemonCards } from "../../themes/pokemon/pokemon";
+import { drabonBallCards } from "../../themes/dragonBall/dragonBall";
 
-export enum LoadingStatus {
-  Uninitialized = "Uninitialized",
-  Loading = "Loading",
-  Errored = "Errored",
-  Loaded = "Loaded",
-}
-
-type CardsSliceState = {
-  status: LoadingStatus;
-  cards: CardState[];
+type GameCardsSliceState = {
+  status: STATUS;
+  cards: GameCard[];
 };
 
-const initialState: CardsSliceState = {
-  status: LoadingStatus.Uninitialized,
+const initialState: GameCardsSliceState = {
+  status: STATUS.UNINITIALIZED,
   cards: [
     {
       id: "",
@@ -30,7 +25,7 @@ const initialState: CardsSliceState = {
   ],
 };
 
-export const cardsSlice = createSlice({
+export const gameCardsSlice = createSlice({
   name: "cards",
   initialState,
   reducers: {
@@ -39,7 +34,7 @@ export const cardsSlice = createSlice({
         action.payload === ":pokemon" ? pokemonCards : drabonBallCards;
       const cards = cardsMixer(selectedTheme);
       cards.map((card, index) => (state.cards[index] = card));
-      state.status = LoadingStatus.Loaded;
+      state.status = STATUS.LOADED;
     },
     setCardIsDoneTrue: (state, action: PayloadAction<string>) => {
       // console.log("Payload one - setCardIsDoneTrue", action.payload);
@@ -65,7 +60,7 @@ export const cardsSlice = createSlice({
     setCardsInitialState: (state) => {
       //state.cards.map((card) => (card.done = null));
       state.cards = initialState.cards;
-      state.status = LoadingStatus.Uninitialized;
+      state.status = STATUS.UNINITIALIZED;
     },
   },
 });
@@ -77,7 +72,9 @@ export const {
   setCardIsDoneFalse,
   setCardsInitialState,
   setCards,
-} = cardsSlice.actions;
+} = gameCardsSlice.actions;
 
-export const selectCardsStatus = (state: CardsSliceState): LoadingStatus =>
-  state.status;
+export const selectGameCardsStatus = (state: RootState): STATUS =>
+  state.gameCards.status;
+export const selectGameCards = (state: RootState): GameCard[] =>
+  state.gameCards.cards;

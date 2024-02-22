@@ -1,10 +1,10 @@
 import { dragonBallImages, pokemonImages } from "../helpers/getImages";
-import { CardState } from "../types/cards/card_types";
+import {  GameCard } from "../types/cards/card_types";
 
-const DRAGONBALL = "dragonball";
+const DRAGONBALL = "dragonBall";
 const POKEMON = "pokemon";
 
-const getFrontImg = (reference: string, card: CardState) => {
+const getFrontImg = (reference: string, card:  GameCard) => {
   const { frontImg, value } = card;
   switch (reference) {
     case POKEMON:
@@ -18,4 +18,4 @@ const getFrontImg = (reference: string, card: CardState) => {
   }
 };
 
-export default getFrontImg
+export default getFrontImg;

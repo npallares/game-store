@@ -1,19 +1,14 @@
-import { THEME } from "./config";
+import { THEMES } from "../enums/theme";
+import { GAMES } from "../enums/games";
 
-const getTo = (theme: string) => {
-  switch (theme) {
-    case THEME.DRAGONBALL:
-      return "/:dragonball";
+interface Props {
+  theme: THEMES;
+  game: GAMES;
+}
 
-    case THEME.POKEMON:
-      return "/:pokemon";
-
-    case THEME.FUTBOL:
-      return "/trivia";
-
-    default:
-      return "/";
-  }
+const getUrlByThemeAndGame = ({ theme, game }: Props) => {
+  const url = game + "/:" + theme;
+  return url;
 };
 
-export default getTo;
+export default getUrlByThemeAndGame;

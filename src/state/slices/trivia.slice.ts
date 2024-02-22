@@ -1,21 +1,22 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { RootState } from "../store";
 
 interface Payload {
   id: string;
 }
 
-interface CounterState {
+type TriviaState = {
   questionCounter: string[];
   matchCounter: number;
 }
 
-const initialState: CounterState = {
+const initialState: TriviaState = {
   questionCounter: [''],
   matchCounter: 0,
 };
 
-export const counterSlice = createSlice({
-  name: "counter",
+export const triviaSlice = createSlice({
+  name: "trivia",
   initialState,
   reducers: {
     addMatchCounter: (state) => {
@@ -27,4 +28,7 @@ export const counterSlice = createSlice({
   },
 });
 
-export const { addMatchCounter, addQuestionCounter } = counterSlice.actions;
+export const { addMatchCounter, addQuestionCounter } = triviaSlice.actions;
+
+export const selectQuestionCounter = (state: RootState): string[] =>
+  state.trivia.questionCounter;

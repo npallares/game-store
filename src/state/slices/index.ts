@@ -1,5 +1,5 @@
 export { gameSlice } from "./game.slice";
-export { cardsSlice } from "./cards.slice";
+export { gameCardsSlice } from "./gameCards.slice";
 export { stepsSlice } from "./steps.slice";
 export { triviaCardSlice } from "./triviaCard.slice";
-export { counterSlice } from "./counter.slice";
+export { triviaSlice } from "./trivia.slice";

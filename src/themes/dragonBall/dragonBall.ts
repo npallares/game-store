@@ -1,4 +1,4 @@
-import { CardState } from "../../../types/cards/card_types";
+import { GameCard } from "../../types/cards/card_types";
 
 const dragonBallImages = {
   goku: "/src/assets/cards/dragonBallImages/goku.jpg",
@@ -12,7 +12,7 @@ const dragonBallImages = {
   background: "dragonBall",
 };
 
-export const drabonBallCards: CardState[] = [
+export const drabonBallCards: GameCard[] = [
   {
     id: "goku01",
     value: "goku",

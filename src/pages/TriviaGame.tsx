@@ -1,25 +1,27 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { Container, Grid, Typography } from "@mui/material";
 import { useAppDispatch, useAppSelector } from "../state/hooks";
-import { futbolCards } from "../CARD-GAME/themes/futbol/futbol";
-import { Status } from "../types/status/status_types";
 import {
+  selectTriviaCards,
+  selectTriviaCardsStatus,
   setTriviaCard,
-  setTriviaCardLoaded,
 } from "../state/slices/triviaCard.slice";
 import { useEffect, useState } from "react";
-import TriviaCardType from "../types/trivia/trivia_Card_type";
 import {
   addMatchCounter,
   addQuestionCounter,
-} from "../state/slices/counter.slice";
+  selectQuestionCounter,
+} from "../state/slices/trivia.slice";
 import { TriviaCard } from "../ui";
+import { STATUS } from "../enums/status";
+import { getFutbolImages } from "../utils/getFutbolImages";
+import { OPTIONS } from "../enums/options";
+import { useParams } from "react-router-dom";
 
 const PLAYERS = {
-  CUTI: "one",
-  MESSI: "two",
-  DYBALA: "three",
-  ENZO: "four",
+  CUTI: OPTIONS.ONE,
+  MESSI: OPTIONS.TWO,
+  DYBALA: OPTIONS.THREE,
+  ENZO: OPTIONS.FOUR,
 };
 
 const TOPIC = {
@@ -55,12 +57,11 @@ const testQuestions = [
 const initialStateCurrentQuestion = testQuestions[0];
 
 const TriviaGame = () => {
+  const { theme } = useParams();
   const dispatch = useAppDispatch();
-  const triviaCardsStatus = useAppSelector((state) => state.triviaCard.status);
-  const triviaCards = useAppSelector((state) => state.triviaCard.cards);
-  const questionCounter = useAppSelector(
-    (state) => state.counter.questionCounter
-  );
+  const triviaCardsStatus = useAppSelector(selectTriviaCardsStatus);
+  const triviaCards = useAppSelector(selectTriviaCards);
+  const questionCounter = useAppSelector(selectQuestionCounter);
   const [numberOfQuestionCounter, setNumberOfQuestionCounter] = useState(0);
   const [currentQuestion, setCurrentQuestion] = useState(
     initialStateCurrentQuestion
@@ -69,21 +70,6 @@ const TriviaGame = () => {
   const lenghtOfQuestions = testQuestions.length;
 
   const isEndGame = numberOfQuestionCounter >= lenghtOfQuestions;
-
-  const setLastCard = ({ id, value }: TriviaCardType) => {
-    void dispatch(setTriviaCard({ id: id, value: value }));
-    void dispatch(setTriviaCardLoaded());
-  };
-
-  const setCards = () => {
-    futbolCards.map((card) => {
-      if (card.id === "four") {
-        console.log("Nicolas", { ...card });
-        return setLastCard({ ...card });
-      }
-      return dispatch(setTriviaCard({ id: card.id, value: card.value }));
-    });
-  };
 
   const matchHandler = () => {
     dispatch(addMatchCounter());
@@ -98,19 +84,18 @@ const TriviaGame = () => {
     return console.log("NO MATCH");
   };
 
+
   useEffect(() => {
-    console.log("triviaCardsStatus", triviaCardsStatus);
-    if (triviaCardsStatus !== Status.UNINITIALIZED) return setCards();
-    void dispatch(setTriviaCardLoaded());
-  }, [triviaCardsStatus]);
+    if (!theme || triviaCardsStatus === STATUS.LOADED) return;
+    void dispatch(setTriviaCard(theme));
+  }, [triviaCardsStatus, theme, dispatch]);
 
   useEffect(() => {
     if (isEndGame) {
-      return console.log("RENDER MODAL");
+      return alert("GAME OVER - RENDER MODAL");
     }
     setCurrentQuestion(testQuestions[numberOfQuestionCounter]);
-    console.log("numberOfQuestionCounter", numberOfQuestionCounter);
-  }, [questionCounter]);
+  }, [questionCounter, isEndGame, numberOfQuestionCounter]);
 
   return (
     <Container component="section">
@@ -152,6 +137,7 @@ const TriviaGame = () => {
                 id={card.id}
                 value={card.value}
                 onClick={() => handlerClick(card.id)}
+                image={getFutbolImages(card.id)}
               />
             </Grid>
           );

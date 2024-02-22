@@ -1,6 +1,7 @@
-import { TriviaCardIds } from "./trivia_Card_Ids_type";
+import { TRIVIA_CARDS_IDS } from "../../enums/triviaCardsIds";
 
 export default interface TriviaCardType {
-  id: TriviaCardIds;
+  id: TRIVIA_CARDS_IDS;
   value: string;
+  frontImg: string;
 }
