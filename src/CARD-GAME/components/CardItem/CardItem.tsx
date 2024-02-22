@@ -1,6 +1,7 @@
 import { CardState } from "../../../types/cards/card_types";
+import getBackImg from "../../../utils/cardItemUtils";
+import getFrontImg from "../../../utils/getFrontImg";
 import styles from "./cardItem.module.scss";
-import { getBackImg, getFrontImg } from "../../views/utils/cardItemUtils";
 
 export const CardItem = ({ card }: { card: CardState }) => {
   const { id, done, ViewFront, backImg } = card;

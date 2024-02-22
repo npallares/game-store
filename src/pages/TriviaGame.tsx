@@ -1,19 +1,19 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { Box, Container, Grid, Typography, styled } from "@mui/material";
-import { useAppDispatch, useAppSelector } from "../../../state/hooks";
-import { futbolCards } from "../../themes/futbol/futbol";
-import { Status } from "../../../types/status/status_types";
+import { Container, Grid, Typography } from "@mui/material";
+import { useAppDispatch, useAppSelector } from "../state/hooks";
+import { futbolCards } from "../CARD-GAME/themes/futbol/futbol";
+import { Status } from "../types/status/status_types";
 import {
   setTriviaCard,
   setTriviaCardLoaded,
-} from "../../../state/slices/triviaCard.slice";
+} from "../state/slices/triviaCard.slice";
 import { useEffect, useState } from "react";
-import TriviaCard from "../../components/TriviaCard/TriviaCard";
-import TriviaCardType from "../../../types/trivia/trivia_Card_type";
+import TriviaCardType from "../types/trivia/trivia_Card_type";
 import {
   addMatchCounter,
   addQuestionCounter,
-} from "../../../state/slices/counter.slice";
+} from "../state/slices/counter.slice";
+import { TriviaCard } from "../ui";
 
 const PLAYERS = {
   CUTI: "one",
@@ -151,7 +151,7 @@ const TriviaGame = () => {
               <TriviaCard
                 id={card.id}
                 value={card.value}
-                handleClick={() => handlerClick(card.id)}
+                onClick={() => handlerClick(card.id)}
               />
             </Grid>
           );
@@ -162,26 +162,3 @@ const TriviaGame = () => {
 };
 
 export default TriviaGame;
-
-{
-  /* <Grid
-  item
-  md={12}
-  sx={{
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-  }}
->
-  <Img src={getImage(THEME.LOGO)} />
-</Grid>
-<Grid item md={4}>
-  <TriviaCard theme={THEME.FUTBOL}  />
-</Grid>
-<Grid item md={4}>
-  <TriviaCard theme={THEME.FUTBOL}  />
-</Grid>
-<Grid item md={4}>
-  <TriviaCard theme={THEME.FUTBOL}  />
-</Grid> */
-}

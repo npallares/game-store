@@ -1,18 +1,17 @@
-import styles from "./home.module.scss";
-import Typography from "@mui/material/Typography";
-import HomeCard from "../../components/HomeCard/HomeCard";
+//import styles from "./styles/home.module.scss";
 import "@fontsource/roboto/300.css";
 import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
-import { THEME } from "../../../helpers/config";
-import { setCardsInitialState } from "../../../state/slices/cards.slice";
 import { useEffect } from "react";
-import { useAppDispatch } from "../../../state/hooks";
-import { Box, Container, Grid, styled } from "@mui/material";
-import getImage from "../../../helpers/getImage";
-import getTo from "../../../helpers/getTo";
-import { setTriviaCardInitialState } from "../../../state/slices/triviaCard.slice";
+import { Container, Grid, styled } from "@mui/material";
+import HomeCard from "../CARD-GAME/components/HomeCard/HomeCard";
+import { useAppDispatch } from "../state/hooks";
+import { setCardsInitialState } from "../state/slices/cards.slice";
+import getImage from "../helpers/getImage";
+import getTo from "../helpers/getTo";
+import { THEME } from "../helpers/config";
+import { setTriviaCardInitialState } from "../state/slices/triviaCard.slice";
 
 const Home = () => {
   const dispatch = useAppDispatch();

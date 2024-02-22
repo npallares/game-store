@@ -1,25 +1,25 @@
 import { useEffect } from "react";
 import styles from "./game.module.scss";
-import { CardItem } from "../../components/CardItem/CardItem";
-import { useAppDispatch, useAppSelector } from "../../../state/hooks";
+import { CardItem } from "../CARD-GAME/components/CardItem/CardItem";
+import { useAppDispatch, useAppSelector } from "../state/hooks";
 import {
   resetAllRedux,
   setFirstCardRedux,
   setIsMatchRedux,
   setSecondCardRedux,
   setIsDone,
-} from "../../../state/slices/game.slice";
+} from "../state/slices/game.slice";
 import {
   setCardIsDoneFalse,
   setCardIsDoneTrue,
   setCardViewFrontFalse,
   setCardViewFrontTrue,
-} from "../../../state/slices/cards.slice";
-import checkIsDone from "../../../helpers/checkIsDone";
-import { CardState } from "../../../types/cards/card_types";
+} from "../state/slices/cards.slice";
+import checkIsDone from "../helpers/checkIsDone";
+import { CardState } from "../types/cards/card_types";
 import { useParams } from "react-router-dom";
-import { setCards } from "../../../state/slices/cards.slice";
-import { addStep } from "../../../state/slices/steps.slice";
+import { setCards } from "../state/slices/cards.slice";
+import { addStep } from "../state/slices/steps.slice";
 
 const Game = () => {
   const { theme } = useParams();
