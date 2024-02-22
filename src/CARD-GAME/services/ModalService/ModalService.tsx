@@ -21,7 +21,7 @@ const ModalService = () => {
   const handleClick = () => {
     dispatch(setIsDone());
     dispatch(setStepsInitialState());
-    console.log("Nicolasss", isDone);
+    //console.log("Nicolasss", isDone);
   };
 
   useEffect(() => {
@@ -30,6 +30,21 @@ const ModalService = () => {
     dispatch(setEfficiency());
   });
 
+  if (isDone && finalTime && efficiency)
+    return (
+      <div className={styles.templateContainer}>
+        <div className={styles.modalLinkContainer}>
+          <Modal
+            title={"Felicitaciones"}
+            time={timeToString(finalTime)}
+            steps={steps}
+            efficiency={efficiency}
+            onClick={handleClick}
+          />
+        </div>
+        <Outlet />
+      </div>
+    );
   if (isDone && finalTime && efficiency)
     return (
       <div className={styles.templateContainer}>

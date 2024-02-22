@@ -20,7 +20,7 @@ const Modal = ({ title, time, steps, efficiency, onClick }: ModalProps) => {
         </span>
         <span className={styles.stepsSection}>
           {
-            <h2>{`Lo hiciste en ${steps} intentos y Tu eficiencia fue del ${efficiency}%`}</h2>
+            <h2>{`Lo hiciste en ${steps} intentos y Tu taza de relacion fue del ${efficiency}%`}</h2>
           }
         </span>
 

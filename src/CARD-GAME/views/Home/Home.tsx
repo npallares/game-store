@@ -11,16 +11,15 @@ import { useEffect } from "react";
 import { useAppDispatch } from "../../../state/hooks";
 import { Box, Container, Grid, styled } from "@mui/material";
 import getImage from "../../../helpers/getImage";
-
-const GAME_WELLCOME = "MEMOFLIP";
-const GAME_DESCRIPTION =
-  "Bienvenido, el juego consiste en voltear cartas para encontrar parejas. La idea es recordar la ubicación de las cartas para hacer match entre ellas. El objetivo es encontrar todas las parejas con el menor número de intentos y tiempo posible.";
+import getTo from "../../../helpers/getTo";
+import { setTriviaCardInitialState } from "../../../state/slices/triviaCard.slice";
 
 const Home = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
     dispatch(setCardsInitialState());
+    dispatch(setTriviaCardInitialState());
   });
 
   const Img = styled("img")({
@@ -45,13 +44,13 @@ const Home = () => {
           <Img src={getImage(THEME.LOGO)} />
         </Grid>
         <Grid item md={4}>
-          <HomeCard theme={THEME.POKEMON} />
+          <HomeCard theme={THEME.POKEMON} to={getTo(THEME.POKEMON)} />
         </Grid>
         <Grid item md={4}>
-          <HomeCard theme={THEME.DRAGONBALL} />
+          <HomeCard theme={THEME.DRAGONBALL} to={getTo(THEME.DRAGONBALL)} />
         </Grid>
         <Grid item md={4}>
-          <HomeCard theme={THEME.FUTBOL} disabled />
+          <HomeCard theme={THEME.FUTBOL} to={getTo(THEME.FUTBOL)} />
         </Grid>
       </Grid>
     </Container>

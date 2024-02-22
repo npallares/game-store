@@ -18,6 +18,11 @@ import pikachuImg from "../assets/cards/pokemonImages/pikachu.jpg";
 import snorlaxImg from "../assets/cards/pokemonImages/snorlax.jpg";
 import squirtleImg from "../assets/cards/pokemonImages/squirtle.jpg";
 
+import oneImg from "../assets/cards/futbol/one.jpg";
+import twoImg from "../assets/cards/futbol/two.jpg";
+import threeImg from "../assets/cards/futbol/three.jpg";
+import fourImg from "../assets/cards/futbol/four.jpg";
+
 export const dragonBallImages: Record<string, string> = {
   bulma: bulmaImg,
   gohan: gohanImg,
@@ -40,4 +45,11 @@ export const pokemonImages: Record<string, string> = {
   pikachu: pikachuImg,
   snorlax: snorlaxImg,
   squirtle: squirtleImg,
+};
+
+export const futbolImages: Record<string, string> = {
+  one: oneImg,
+  two: twoImg,
+  three: threeImg,
+  four: fourImg,
 };

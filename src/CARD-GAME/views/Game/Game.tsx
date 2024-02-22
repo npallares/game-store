@@ -17,16 +17,16 @@ import {
 } from "../../../state/slices/cards.slice";
 import checkIsDone from "../../../helpers/checkIsDone";
 import { CardState } from "../../../types/cards/card_types";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { setCards } from "../../../state/slices/cards.slice";
 import { addStep } from "../../../state/slices/steps.slice";
 
 const Game = () => {
   const { theme } = useParams();
+  const dispatch = useAppDispatch();
   const cardsStatus = useAppSelector((state) => state.cards.status);
   const cards = useAppSelector((state) => state.cards.cards);
   const gameState = useAppSelector((state) => state.game);
-  const dispatch = useAppDispatch();
   //const navigate = useNavigate();
 
   const { firstCardId, secondCardId, isMatch } = gameState;

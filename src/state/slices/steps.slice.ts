@@ -12,7 +12,6 @@ const initialState: StepsState = {
 
 const getEfficiency = (steps: number): number => {
   const efficiency = 800 / steps; // si steps es el 100%, necesitamos saber cuanto porcentaje es 8 (100%)
-  console.log("Nicolas", efficiency, steps);
   return Math.round(efficiency);
 };
 

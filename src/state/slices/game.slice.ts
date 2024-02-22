@@ -1,7 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
-
-// Define a type for the slice state
+interface SetFirstCard {
+  value: string | null;
+  id: string | null;
+}
+interface SetSecondCard {
+  id: string | null;
+  value: string | null;
+}
 interface GameStateReducer {
   firstCard: null | string;
   firstCardId: null | string;
@@ -9,16 +15,6 @@ interface GameStateReducer {
   secondCardId: null | string;
   isMatch: null | boolean;
   isDone: null | boolean;
-}
-
-interface SetFirstCard {
-  value: string | null;
-  id: string | null;
-}
-
-interface SetSecondCard {
-  id: string | null;
-  value: string | null;
 }
 
 const initialState: GameStateReducer = {

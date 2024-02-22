@@ -17,15 +17,20 @@ export enum ImagesProps {
 interface Props {
   theme: string;
   disabled?: boolean;
+  to?: string | null;
 }
 
-const HomeCard = ({ theme, disabled = false }: Props): JSX.Element => {
+const HomeCard = ({
+  theme,
+  disabled = false,
+  to = null,
+}: Props): JSX.Element => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  const handleClick = (theme: string) => {
+  const handleClick = () => {
     dispatch(setInitialTimestamp());
-    navigate(`/:${theme}`);
+    if (to) navigate(to);
   };
 
   const Img = styled("img")({
@@ -53,7 +58,7 @@ const HomeCard = ({ theme, disabled = false }: Props): JSX.Element => {
         <Button
           variant="contained"
           size="large"
-          onClick={() => handleClick(theme)}
+          onClick={() => handleClick()}
           sx={{ width: "100%", height: 50 }}
           disabled={disabled}
         >
