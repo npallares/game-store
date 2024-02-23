@@ -1,4 +1,4 @@
-import { Container, Grid, Typography } from "@mui/material";
+import { Container, Grid, Typography, styled } from "@mui/material";
 import { useAppDispatch, useAppSelector } from "../state/hooks";
 import {
   selectTriviaCards,
@@ -11,11 +11,20 @@ import {
   addQuestionCounter,
   selectQuestionCounter,
 } from "../state/slices/trivia.slice";
-import { TriviaCard } from "../ui";
+import { TriviaCard, TriviaDisplay } from "../ui";
 import { STATUS } from "../enums/status";
 import { getFutbolImages } from "../utils/getFutbolImages";
 import { OPTIONS } from "../enums/options";
 import { useParams } from "react-router-dom";
+import getImage from "../helpers/getImageByTheme";
+import { THEMES } from "../enums/theme";
+
+const Img = styled("img")({
+  width: "auto",
+  height: "50%",
+  objectFit: "cover",
+  objectPosition: "center",
+});
 
 const PLAYERS = {
   CUTI: OPTIONS.ONE,
@@ -84,7 +93,6 @@ const TriviaGame = () => {
     return console.log("NO MATCH");
   };
 
-
   useEffect(() => {
     if (!theme || triviaCardsStatus === STATUS.LOADED) return;
     void dispatch(setTriviaCard(theme));
@@ -98,9 +106,24 @@ const TriviaGame = () => {
   }, [questionCounter, isEndGame, numberOfQuestionCounter]);
 
   return (
-    <Container component="section">
-      <Grid container border={1}>
+    <Container component="article">
+      <Grid container spacing={1}>
         <Grid
+          item
+          md={12}
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <Img src={getImage(THEMES.LOGO)} />
+        </Grid>
+      </Grid>
+      <Grid container component="section" p={3}>
+        <Grid
+          border={1}
+          borderRadius={3}
           item
           md={12}
           key={currentQuestion.id}
@@ -108,28 +131,28 @@ const TriviaGame = () => {
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
-            border: 1,
             width: "100%",
             margin: 0,
+            backgroundColor: "#424242",
+            color: "white",
           }}
         >
-          <Typography>{currentQuestion.value}</Typography>
+          <TriviaDisplay query={currentQuestion.value} />
         </Grid>
       </Grid>
-      <Grid container border={1}>
+      <Grid container component="ul" sx={{ paddingLeft: 0, paddingTop: 1 }}>
         {triviaCards.map((card) => {
           return (
             <Grid
+              component="li"
+              key={card.id}
               item
               md={3}
-              key={card.id}
               sx={{
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
-                border: 1,
                 width: "100%",
-                background: "red",
                 margin: 0,
               }}
             >

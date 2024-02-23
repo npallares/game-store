@@ -1,14 +1,14 @@
 import { TRIVIA_CARDS_IDS } from "../../enums/triviaCardsIds";
 import { TriviaCard } from "../../types/cards/card_types";
 
-export const FUTBOL_VALUES = {
+const FUTBOL_VALUES = {
   ONE: "cuti romero",
   TWO: "lionel messi",
   THREE: "paulo dybala",
   FOUR: "enzo fernandez",
 };
 
-export const FUTBOL_IMAGES = {
+const FUTBOL_IMAGES = {
   ONE: "/src/assets/cards/futbol/one.jpg",
   TWO: "/src/assets/cards/futbol/two.jpg",
   THREE: "/src/assets/cards/futbol/three.jpg",
@@ -37,3 +37,4 @@ export const futbolCards: TriviaCard[] = [
     frontImg: FUTBOL_IMAGES.FOUR,
   },
 ];
+
