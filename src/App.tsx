@@ -7,15 +7,20 @@ import Material from "./pages/Material";
 import React from "react";
 import { Home, TriviaGame } from "./pages";
 
+enum PATHS {
+  CARD_GAME = "/cardsGame/:theme",
+  TRIVIA_GAME = "/trivia/:theme",
+}
+
 function App() {
   return (
     <React.StrictMode>
       <Routes>
         <Route path="/" element={<ModalService />}>
           <Route index element={<Home />} />
-          <Route path="/cardsGame/:theme" element={<Game />} />
+          <Route path={PATHS.CARD_GAME} element={<Game />} />
+          <Route path={PATHS.TRIVIA_GAME} element={<TriviaGame />} />
           <Route path="/material" element={<Material />} />
-          <Route path="/trivia/:theme" element={<TriviaGame />} />
         </Route>
       </Routes>
     </React.StrictMode>

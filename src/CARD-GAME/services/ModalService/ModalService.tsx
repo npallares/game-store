@@ -2,21 +2,30 @@ import { useEffect } from "react";
 import { Outlet } from "react-router-dom";
 import styles from "./modal.module.scss";
 import { useAppDispatch, useAppSelector } from "../../../state/hooks";
-import Modal from "../../components/Modal/Modal";
 import { setIsDone } from "../../../state/slices/game.slice";
 import {
   setFinishedTimestamp,
   getFinalTime,
 } from "../../../state/slices/time.slice";
 import { timeToString } from "./utils/getFinalTime";
-import { setEfficiency, setStepsInitialState } from "../../../state/slices/steps.slice";
+import {
+  setEfficiency,
+  setStepsInitialState,
+} from "../../../state/slices/steps.slice";
+import {
+  getIsModalGame,
+  getIsTriviaGame,
+} from "../../../state/slices/modal.slice";
+import ModalTriviaTempalte from "../../../ui/templates/ModalTriviaTemplate/ModalTriviaTemplate";
 
 const ModalService = () => {
   const dispatch = useAppDispatch();
-  const isDone = useAppSelector((state) => state.game.isDone);
+  const isGame = useAppSelector(getIsModalGame);
+  const isTriviaGame = useAppSelector(getIsTriviaGame);
   const finalTime = useAppSelector((state) => state.time.finalTime);
   const efficiency = useAppSelector((state) => state.steps.efficiency);
   const steps = useAppSelector((state) => state.steps.steps);
+  const mateches = useAppSelector((state)=> state.trivia.matchCounter)
 
   const handleClick = () => {
     dispatch(setIsDone());
@@ -30,36 +39,36 @@ const ModalService = () => {
     dispatch(setEfficiency());
   });
 
-  if (isDone && finalTime && efficiency)
+  if (isTriviaGame)
     return (
       <div className={styles.templateContainer}>
         <div className={styles.modalLinkContainer}>
-          <Modal
-            title={"Felicitaciones"}
-            time={timeToString(finalTime)}
-            steps={steps}
-            efficiency={efficiency}
+          <ModalTriviaTempalte
+            matches={mateches}
+            title={"IS TRIVIA GAME"}
+            time={Number(finalTime)}
             onClick={handleClick}
           />
         </div>
         <Outlet />
       </div>
     );
-  if (isDone && finalTime && efficiency)
+
+  if (isGame)
     return (
       <div className={styles.templateContainer}>
         <div className={styles.modalLinkContainer}>
-          <Modal
-            title={"Felicitaciones"}
-            time={timeToString(finalTime)}
-            steps={steps}
-            efficiency={efficiency}
+          <ModalTriviaTempalte
+            matches={mateches}
+            title={"IS TRIVIA GAME"}
+            time={Number(finalTime)}
             onClick={handleClick}
           />
         </div>
         <Outlet />
       </div>
     );
+
   return (
     <div className={styles.modalContainer}>
       <Outlet />

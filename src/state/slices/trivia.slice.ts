@@ -32,3 +32,6 @@ export const { addMatchCounter, addQuestionCounter } = triviaSlice.actions;
 
 export const selectQuestionCounter = (state: RootState): string[] =>
   state.trivia.questionCounter;
+
+  export const selectMatchCounter = (state: RootState): number =>
+  state.trivia.matchCounter;

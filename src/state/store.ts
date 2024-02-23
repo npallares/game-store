@@ -6,6 +6,7 @@ import {
   stepsSlice,
   gameCardsSlice,
   triviaSlice,
+  modalSlice,
 } from "./slices";
 
 // TODO: unificar y resolver TriviaCards con cards
@@ -18,6 +19,7 @@ export const store = configureStore({
     time: timeSlice,
     steps: stepsSlice.reducer,
     trivia: triviaSlice.reducer,
+    modalSlice: modalSlice.reducer,
   },
 });
 
