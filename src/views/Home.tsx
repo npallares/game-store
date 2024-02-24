@@ -13,7 +13,12 @@ import { setTriviaCardInitialState } from "../state/slices/triviaCards.slice";
 import getUrlByThemeAndGame from "../helpers/getUrlByThemeAndGame";
 import { GAMES } from "../enums/games";
 import { THEMES } from "../enums/theme";
-import { getCurrentGameStatus, setCurrentGamseStatusToInitialState, setStatusLoaded } from "../state/slices/currentGame.slice";
+import {
+  getCurrentGameStatus,
+  setCurrentGamseStatusToInitialState,
+  setStatusLoaded,
+} from "../state/slices/currentGame.slice";
+import { triviaGameSliceToInitialState } from "../state/slices/triviaGame.slice";
 
 const Home = () => {
   const dispatch = useAppDispatch();
@@ -23,12 +28,12 @@ const Home = () => {
     dispatch(setCardsInitialState());
     dispatch(setTriviaCardInitialState());
   });
-  
+
   useEffect(() => {
     void dispatch(setStatusLoaded());
     dispatch(setCurrentGamseStatusToInitialState());
+    dispatch(triviaGameSliceToInitialState());
   }, [dispatch, currentGameStatus]);
-  
 
   const Img = styled("img")({
     width: "auto",

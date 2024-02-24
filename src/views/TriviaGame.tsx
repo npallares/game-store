@@ -1,4 +1,4 @@
-import { Container, Grid, Typography, styled } from "@mui/material";
+import { Container, Grid,  styled } from "@mui/material";
 import { useAppDispatch, useAppSelector } from "../state/hooks";
 import {
   selectTriviaCards,
@@ -9,7 +9,7 @@ import { useEffect, useState } from "react";
 import {
   addMatchCounter,
   addQuestionCounter,
-  selectQuestionCounter,
+  getLogs,
 } from "../state/slices/triviaGame.slice";
 import { TriviaCard, TriviaDisplay } from "../ui";
 import { STATUS } from "../enums/status";
@@ -18,6 +18,13 @@ import { OPTIONS } from "../enums/options";
 import { useParams } from "react-router-dom";
 import getImage from "../helpers/getImageByTheme";
 import { THEMES } from "../enums/theme";
+import {
+  getCurrentGameStatus,
+  getCurrentGametheme,
+  setCurrentGameTheme,
+  setStatusLoaded,
+  startCurrentGame,
+} from "../state/slices/currentGame.slice";
 
 const Img = styled("img")({
   width: "auto",
@@ -70,11 +77,13 @@ const TriviaGame = () => {
   const dispatch = useAppDispatch();
   const triviaCardsStatus = useAppSelector(selectTriviaCardsStatus);
   const triviaCards = useAppSelector(selectTriviaCards);
-  const questionCounter = useAppSelector(selectQuestionCounter);
+  const questionCounter = useAppSelector(getLogs);
   const [numberOfQuestionCounter, setNumberOfQuestionCounter] = useState(0);
   const [currentQuestion, setCurrentQuestion] = useState(
     initialStateCurrentQuestion
   );
+  const currentGameStatus = useAppSelector(getCurrentGameStatus);
+  const currentGametheme = useAppSelector(getCurrentGametheme);
 
   const lenghtOfQuestions = testQuestions.length;
 
@@ -94,16 +103,30 @@ const TriviaGame = () => {
   };
 
   useEffect(() => {
+    if (currentGameStatus === STATUS.UNINITIALIZED)
+      dispatch(startCurrentGame());
+    if (!currentGametheme)
+      dispatch(setCurrentGameTheme({ theme: currentGametheme }));
+  }, [dispatch]);
+
+  useEffect(() => {
     if (!theme || triviaCardsStatus === STATUS.LOADED) return;
     void dispatch(setTriviaCard(theme));
   }, [triviaCardsStatus, theme, dispatch]);
 
   useEffect(() => {
-    if (isEndGame) {
-      return alert("GAME OVER - RENDER MODAL");
+    if (currentGameStatus === STATUS.LOADING && isEndGame) {
+      void dispatch(setStatusLoaded());
+      console.log("GAME OVERR - RENDER MODAL");
+      setCurrentQuestion(testQuestions[numberOfQuestionCounter]);
     }
-    setCurrentQuestion(testQuestions[numberOfQuestionCounter]);
-  }, [questionCounter, isEndGame, numberOfQuestionCounter]);
+  }, [
+    questionCounter,
+    isEndGame,
+    numberOfQuestionCounter,
+    dispatch,
+    currentGameStatus,
+  ]);
 
   return (
     <Container component="article">

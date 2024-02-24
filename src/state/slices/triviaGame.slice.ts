@@ -25,12 +25,17 @@ export const triviaGameSlice = createSlice({
     addQuestionCounter: (state, action: PayloadAction<Payload>) => {
       state.logs.push(action.payload.id);
     },
+    triviaGameSliceToInitialState: (state) => {
+      state.logs = [""];
+      state.matchCounter = 0;
+    },
   },
 });
 
-export const { addMatchCounter, addQuestionCounter } = triviaGameSlice.actions;
+export const { addMatchCounter, addQuestionCounter, triviaGameSliceToInitialState } =
+  triviaGameSlice.actions;
 
-export const selectQuestionCounter = (state: RootState): string[] =>
+export const getLogs = (state: RootState): string[] =>
   state.triviaGame.logs;
 
 export const selectMatchCounter = (state: RootState): number =>

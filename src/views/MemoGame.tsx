@@ -140,7 +140,7 @@ const MemoGame = () => {
     if (!currentGametheme)
       dispatch(setCurrentGameTheme({ theme: currentTheme }));
   }, [currentGameStatus, dispatch]);
-
+  
   useEffect(() => {
     const isOver = cards.every((card) => card.done === true);
     if (currentGameStatus === STATUS.LOADING && isOver)
@@ -162,9 +162,6 @@ const MemoGame = () => {
   return (
     <div
       className={styles.background}
-      style={{
-   
-      }}
     >
       <Box>
         <Img src={getImage(THEMES.LOGO)} />

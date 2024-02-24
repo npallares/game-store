@@ -10,7 +10,7 @@ const AppModal = () => {
 
   const comprobation = currentGameStatus === STATUS.LOADED;
 
-  console.log("Nicolas", currentGameStatus);
+  console.log("Nicolas - Currennt Game Status -", currentGameStatus);
 
   const isOn = comprobation;
 

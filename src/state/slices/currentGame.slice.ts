@@ -51,8 +51,8 @@ export const currentGame = createSlice({
 export const {
   setCurrentGameTheme,
   startCurrentGame,
-  setCurrentGamseStatusToInitialState,
   setStatusLoaded,
+  setCurrentGamseStatusToInitialState,
 } = currentGame.actions;
 
 export const getCurrentGameStatus = (state: RootState): STATUS =>
