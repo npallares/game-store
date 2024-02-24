@@ -2,6 +2,11 @@ import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { STATUS } from "../../enums/status";
 import { THEMES } from "../../enums/theme";
 import { RootState } from "../store";
+import { GAMES } from "../../enums/games";
+
+type SetGamePayload = {
+  theme: GAMES;
+};
 
 type SetThemePayload = {
   theme: THEMES;
@@ -9,37 +14,50 @@ type SetThemePayload = {
 
 interface CurrentGameState {
   status: STATUS;
-  theme: THEMES | null;
+  game: GAMES;
+  theme: THEMES;
 }
 
 const initialState: CurrentGameState = {
   status: STATUS.UNINITIALIZED,
-  theme: null,
+  game: GAMES.OTHER,
+  theme: THEMES.OTHER,
 };
 
 export const currentGame = createSlice({
   name: "currentGame",
   initialState,
   reducers: {
+    setCurrentGame: (state, action: PayloadAction<SetGamePayload>) => {
+      state.game = action.payload.theme;
+    },
     setCurrentGameTheme: (state, action: PayloadAction<SetThemePayload>) => {
       state.theme = action.payload.theme;
     },
     startCurrentGame: (state) => {
       state.status = STATUS.LOADING;
     },
-    currentGameOver: (state) => {
+    setStatusLoaded: (state) => {
       state.status = STATUS.LOADED;
     },
-    restartGame: (state) => {
+    setCurrentGamseStatusToInitialState: (state) => {
       state.status = initialState.status;
+      state.game = initialState.game;
+      state.theme = initialState.theme;
     },
   },
 });
 
-export const { setCurrentGameTheme, startCurrentGame, currentGameOver, restartGame } =
-  currentGame.actions;
+export const {
+  setCurrentGameTheme,
+  startCurrentGame,
+  setCurrentGamseStatusToInitialState,
+  setStatusLoaded,
+} = currentGame.actions;
 
 export const getCurrentGameStatus = (state: RootState): STATUS =>
   state.currentGame.status;
-export const getCurrentGametheme = (state: RootState): THEMES | null =>
+export const getCurrentGametheme = (state: RootState): THEMES =>
   state.currentGame.theme;
+export const getCurrentGame = (state: RootState): GAMES =>
+  state.currentGame.game;

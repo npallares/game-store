@@ -6,14 +6,13 @@ interface ModalProps {
   title: string | null;
   time: number | null;
   matches: number | null;
-  onClick?: () => void | null;
+  onClick?: () => void;
 }
 const ModalTriviaTempalte: React.FC<ModalProps> = ({
   title = "TITLE",
   time = 12345,
   matches = 0,
-  logs = null,
-  onClick = null,
+  onClick = () => console.log("Initial on Click - ModalTriviaTempalte.ts"),
 }) => {
   return (
     <section className={styles.modalContainer}>
@@ -25,7 +24,7 @@ const ModalTriviaTempalte: React.FC<ModalProps> = ({
         <span className={styles.stepsSection}>
           {<h2>{`hiciste match ${matches} veces`}</h2>}
         </span>
-        <span className={styles.stepsSection}>{<h2>{logs}</h2>}</span>
+        <span className={styles.stepsSection}>{<h2>{"LOGS"}</h2>}</span>
 
         <section className={styles.buttonSection}>
           <Link className={styles.test} onClick={onClick} to="/">

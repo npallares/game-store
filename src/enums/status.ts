@@ -3,3 +3,9 @@ export enum STATUS {
   LOADING = "loading",
   LOADED = "loaded",
 }
+
+/* export enum CURRENT_GAME_STATUS {
+  UNINITIALIZED = "uninitialized",
+  IN_PROGRESS = "inProgress",
+  IS_DONE = 'isDone',
+} */

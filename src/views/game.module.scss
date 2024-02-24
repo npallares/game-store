@@ -1,9 +1,11 @@
 .background {
   display: flex;
-  justify-content: center;
+  justify-content: start;
   align-items: center;
   height: 100vh;
-  //border: 1px solid blue;
+  //border: 5px solid blue;
+  flex-direction: column;
+  padding-top: 50px;
 }
 
 .container {

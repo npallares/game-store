@@ -6,21 +6,29 @@ import "@fontsource/roboto/700.css";
 import { useEffect } from "react";
 import { Container, Grid, styled } from "@mui/material";
 import HomeCard from "../CARD-GAME/components/HomeCard/HomeCard";
-import { useAppDispatch } from "../state/hooks";
+import { useAppDispatch, useAppSelector } from "../state/hooks";
 import { setCardsInitialState } from "../state/slices/memoCards.slice";
 import getImage from "../helpers/getImageByTheme";
 import { setTriviaCardInitialState } from "../state/slices/triviaCards.slice";
-import getUrlByThemeAndGame from "../helpers/getTo";
+import getUrlByThemeAndGame from "../helpers/getUrlByThemeAndGame";
 import { GAMES } from "../enums/games";
 import { THEMES } from "../enums/theme";
+import { getCurrentGameStatus, setCurrentGamseStatusToInitialState, setStatusLoaded } from "../state/slices/currentGame.slice";
 
 const Home = () => {
   const dispatch = useAppDispatch();
+  const currentGameStatus = useAppSelector(getCurrentGameStatus);
 
   useEffect(() => {
     dispatch(setCardsInitialState());
     dispatch(setTriviaCardInitialState());
   });
+  
+  useEffect(() => {
+    void dispatch(setStatusLoaded());
+    dispatch(setCurrentGamseStatusToInitialState());
+  }, [dispatch, currentGameStatus]);
+  
 
   const Img = styled("img")({
     width: "auto",
