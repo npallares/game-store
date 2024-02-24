@@ -1,11 +1,11 @@
 //import "./App.css";
 import "./styles/index.css";
 import { Route, Routes } from "react-router-dom";
-import Game from "./pages/Game";
+import Game from "./views/MemoGame";
 import ModalService from "./CARD-GAME/services/ModalService/ModalService";
-import Material from "./pages/Material";
+import Material from "./views/Material";
 import React from "react";
-import { Home, TriviaGame } from "./pages";
+import { Home, TriviaGame } from "./views";
 
 enum PATHS {
   CARD_GAME = "/cardsGame/:theme",

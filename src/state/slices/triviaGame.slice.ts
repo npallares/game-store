@@ -5,17 +5,17 @@ interface Payload {
   id: string;
 }
 
-type TriviaState = {
-  questionCounter: string[];
+type TriviaGameState = {
+  logs: string[];
   matchCounter: number;
-}
+};
 
-const initialState: TriviaState = {
-  questionCounter: [''],
+const initialState: TriviaGameState = {
+  logs: [""], // TODO: si se pone array vacio, se descuaja el match controler... revisar
   matchCounter: 0,
 };
 
-export const triviaSlice = createSlice({
+export const triviaGameSlice = createSlice({
   name: "trivia",
   initialState,
   reducers: {
@@ -23,15 +23,15 @@ export const triviaSlice = createSlice({
       state.matchCounter = state.matchCounter + 1;
     },
     addQuestionCounter: (state, action: PayloadAction<Payload>) => {
-      state.questionCounter.push(action.payload.id);
+      state.logs.push(action.payload.id);
     },
   },
 });
 
-export const { addMatchCounter, addQuestionCounter } = triviaSlice.actions;
+export const { addMatchCounter, addQuestionCounter } = triviaGameSlice.actions;
 
 export const selectQuestionCounter = (state: RootState): string[] =>
-  state.trivia.questionCounter;
+  state.triviaGame.logs;
 
-  export const selectMatchCounter = (state: RootState): number =>
-  state.trivia.matchCounter;
+export const selectMatchCounter = (state: RootState): number =>
+  state.triviaGame.matchCounter;

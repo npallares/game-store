@@ -13,7 +13,7 @@ import { THEMES } from "../../../enums/theme";
 import {
   selectMatchCounter,
   selectQuestionCounter,
-} from "../../../state/slices/trivia.slice";
+} from "../../../state/slices/triviaGame.slice";
 
 interface ModalProps extends Modal {
   title: string | null;

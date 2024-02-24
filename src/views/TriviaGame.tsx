@@ -4,13 +4,13 @@ import {
   selectTriviaCards,
   selectTriviaCardsStatus,
   setTriviaCard,
-} from "../state/slices/triviaCard.slice";
+} from "../state/slices/triviaCards.slice";
 import { useEffect, useState } from "react";
 import {
   addMatchCounter,
   addQuestionCounter,
   selectQuestionCounter,
-} from "../state/slices/trivia.slice";
+} from "../state/slices/triviaGame.slice";
 import { TriviaCard, TriviaDisplay } from "../ui";
 import { STATUS } from "../enums/status";
 import { getFutbolImages } from "../utils/getFutbolImages";

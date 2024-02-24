@@ -14,7 +14,7 @@ const initialState: TriviaCardStateReducer = {
   cards: [],
 };
 
-export const triviaCardSlice = createSlice({
+export const triviaCardsSlice = createSlice({
   name: "trivia",
   initialState,
   reducers: {
@@ -34,10 +34,10 @@ export const triviaCardSlice = createSlice({
 });
 
 export const { setTriviaCard, setTriviaCardInitialState } =
-  triviaCardSlice.actions;
+  triviaCardsSlice.actions;
 
 export const selectTriviaCards = (state: RootState): TriviaCard[] =>
-  state.triviaCard.cards;
+  state.triviaCards.cards;
 
 export const selectTriviaCardsStatus = (state: RootState): STATUS =>
-  state.triviaCard.status;
+  state.triviaCards.status;

@@ -8,32 +8,50 @@ import {
   setFirstCardRedux,
   setIsMatchRedux,
   setSecondCardRedux,
-  setIsDone,
-} from "../state/slices/game.slice";
+  selectMemoGame,
+} from "../state/slices/memoGame.slice";
 import {
-  selectGameCards,
-  selectGameCardsStatus,
+  getMemoGameCards,
+  getMemoGamesStatus,
   setCardIsDoneFalse,
   setCardIsDoneTrue,
   setCardViewFrontFalse,
   setCardViewFrontTrue,
-} from "../state/slices/gameCards.slice";
+} from "../state/slices/memoCards.slice";
 import checkIsDone from "../utils/checkIsDone";
 import type { GameCard } from "../types/cards/card_types";
 import { useParams } from "react-router-dom";
-import { setCards } from "../state/slices/gameCards.slice";
+import { setCards } from "../state/slices/memoCards.slice";
 import { addStep } from "../state/slices/steps.slice";
 import { STATUS } from "../enums/status";
+import {
+  currentGameOver,
+  getCurrentGameStatus,
+  getCurrentGametheme,
+  setCurrentGameTheme,
+  startCurrentGame,
+} from "../state/slices/currentGame.slice";
+import { THEMES } from "../enums/theme";
 
-const Game = () => {
+const getCurrentTheme = (theme: string | undefined): THEMES => {
+  if (theme === `:${THEMES.POKEMON}`) return THEMES.POKEMON;
+  if (theme === `:${THEMES.DRAGONBALL}`) return THEMES.DRAGONBALL;
+  return THEMES.OTHER;
+};
+
+const MemoGame = () => {
   const { theme } = useParams();
   const dispatch = useAppDispatch();
-  const cardsStatus = useAppSelector(selectGameCardsStatus);
-  const cards = useAppSelector(selectGameCards);
-  const gameState = useAppSelector((state) => state.game);
+  const memoGameStatus = useAppSelector(getMemoGamesStatus);
+  const cards = useAppSelector(getMemoGameCards);
+  const memoGame = useAppSelector(selectMemoGame);
+  const currentGameStatus = useAppSelector(getCurrentGameStatus);
+  const currentGametheme = useAppSelector(getCurrentGametheme);
+  const currentTheme = getCurrentTheme(theme);
+
   //const navigate = useNavigate();
 
-  const { firstCardId, secondCardId, isMatch } = gameState;
+  const { firstCardId, secondCardId, isMatch } = memoGame;
 
   const resetAll = () => {
     dispatch(resetAllRedux());
@@ -48,7 +66,10 @@ const Game = () => {
 
   const gameOver = () => {
     const isOver = cards.every((card) => card.done === true);
-    return isOver ? /* navigate("/gameover") */ dispatch(setIsDone()) : false;
+    if (isOver) {
+      void dispatch(currentGameOver());
+      //void dispatch(setCurrentGameTheme({ theme: currentTheme }));
+    }
   };
 
   const resetViewFrontTimeOut = (firstCardId: string, secondCardId: string) =>
@@ -106,15 +127,29 @@ const Game = () => {
     settingCards(value, id);
   };
 
+  //PRIMER MONTAJE
   useEffect(() => {
-    if (!theme || cardsStatus !== STATUS.UNINITIALIZED) return;
-    dispatch(setCards(theme));
-  }, [cardsStatus]);
+    if (currentGameStatus === STATUS.UNINITIALIZED)
+      dispatch(startCurrentGame());
+    if (!currentGametheme)
+      dispatch(setCurrentGameTheme({ theme: currentTheme }));
+  }, [currentGameStatus, dispatch]);
+
+  useEffect(() => {
+    const isOver = cards.every((card) => card.done === true);
+    if (currentGameStatus === STATUS.LOADING && isOver)
+      dispatch(startCurrentGame());
+  }, [currentGameStatus, dispatch]);
+
+  useEffect(() => {
+    if (!theme || memoGameStatus !== STATUS.UNINITIALIZED) return;
+    void dispatch(setCards(theme));
+  }, [dispatch, memoGameStatus, theme]);
 
   useEffect(() => {
     gameOver();
     gameFunction();
-  }, [gameState.isMatch]);
+  }, [memoGame.isMatch]);
 
   return (
     <div className={styles.background}>
@@ -136,4 +171,4 @@ const Game = () => {
   );
 };
 
-export default Game;
+export default MemoGame;

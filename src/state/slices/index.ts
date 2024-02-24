@@ -1,6 +1,7 @@
-export { gameSlice } from "./game.slice";
-export { gameCardsSlice } from "./gameCards.slice";
+export { memoGameSlice } from "./memoGame.slice";
+export { currentGame } from "./currentGame.slice";
+export { memoCardsSlice } from "./memoCards.slice";
 export { stepsSlice } from "./steps.slice";
-export { triviaCardSlice } from "./triviaCard.slice";
-export { triviaSlice } from "./trivia.slice";
+export { triviaCardsSlice } from "./triviaCards.slice";
+export { triviaGameSlice } from "./triviaGame.slice";
 export { modalSlice } from "./modal.slice";

@@ -6,12 +6,12 @@ import { STATUS } from "../../enums/status";
 import { pokemonCards } from "../../themes/pokemon/pokemon";
 import { drabonBallCards } from "../../themes/dragonBall/dragonBall";
 
-type GameCardsSliceState = {
+type MemoCardsSliceState = {
   status: STATUS;
   cards: GameCard[];
 };
 
-const initialState: GameCardsSliceState = {
+const initialState: MemoCardsSliceState = {
   status: STATUS.UNINITIALIZED,
   cards: [
     {
@@ -25,7 +25,7 @@ const initialState: GameCardsSliceState = {
   ],
 };
 
-export const gameCardsSlice = createSlice({
+export const memoCardsSlice = createSlice({
   name: "cards",
   initialState,
   reducers: {
@@ -72,9 +72,9 @@ export const {
   setCardIsDoneFalse,
   setCardsInitialState,
   setCards,
-} = gameCardsSlice.actions;
+} = memoCardsSlice.actions;
 
-export const selectGameCardsStatus = (state: RootState): STATUS =>
-  state.gameCards.status;
-export const selectGameCards = (state: RootState): GameCard[] =>
-  state.gameCards.cards;
+export const getMemoGamesStatus = (state: RootState): STATUS =>
+  state.memoCards.status;
+export const getMemoGameCards = (state: RootState): GameCard[] =>
+  state.memoCards.cards;

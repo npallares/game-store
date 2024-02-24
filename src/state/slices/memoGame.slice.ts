@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
+import { RootState } from "../store";
 interface SetFirstCard {
   value: string | null;
   id: string | null;
@@ -8,7 +9,7 @@ interface SetSecondCard {
   id: string | null;
   value: string | null;
 }
-interface GameStateReducer {
+interface MemoGameState {
   firstCard: null | string;
   firstCardId: null | string;
   secondCard: null | string;
@@ -17,7 +18,7 @@ interface GameStateReducer {
   isDone: null | boolean;
 }
 
-const initialState: GameStateReducer = {
+const initialState: MemoGameState = {
   firstCard: null,
   firstCardId: null,
   secondCard: null,
@@ -26,7 +27,7 @@ const initialState: GameStateReducer = {
   isDone: null,
 };
 
-export const gameSlice = createSlice({
+export const memoGameSlice = createSlice({
   name: "game",
   initialState,
   reducers: {
@@ -67,4 +68,8 @@ export const {
   setIsMatchRedux,
   setIsDone,
   resetAllRedux,
-} = gameSlice.actions;
+} = memoGameSlice.actions;
+
+export const selectMemoGame = (state: RootState): MemoGameState =>
+  state.memoGame;
+

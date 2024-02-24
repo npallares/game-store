@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { Outlet } from "react-router-dom";
 import styles from "./modal.module.scss";
 import { useAppDispatch, useAppSelector } from "../../../state/hooks";
-import { setIsDone } from "../../../state/slices/game.slice";
+import { setIsDone } from "../../../state/slices/memoGame.slice";
 import {
   setFinishedTimestamp,
   getFinalTime,
@@ -17,6 +17,7 @@ import {
   getIsTriviaGame,
 } from "../../../state/slices/modal.slice";
 import ModalTriviaTempalte from "../../../ui/templates/ModalTriviaTemplate/ModalTriviaTemplate";
+import { selectMatchCounter } from "../../../state/slices/triviaGame.slice";
 
 const ModalService = () => {
   const dispatch = useAppDispatch();
@@ -25,7 +26,7 @@ const ModalService = () => {
   const finalTime = useAppSelector((state) => state.time.finalTime);
   const efficiency = useAppSelector((state) => state.steps.efficiency);
   const steps = useAppSelector((state) => state.steps.steps);
-  const mateches = useAppSelector((state)=> state.trivia.matchCounter)
+  const mateches = useAppSelector(selectMatchCounter);
 
   const handleClick = () => {
     dispatch(setIsDone());

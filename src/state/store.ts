@@ -1,24 +1,26 @@
 import { configureStore } from "@reduxjs/toolkit";
 import timeSlice from "./slices/time.slice";
 import {
-  triviaCardSlice,
-  gameSlice,
+  triviaCardsSlice,
+  memoGameSlice,
   stepsSlice,
-  gameCardsSlice,
-  triviaSlice,
+  memoCardsSlice,
+  triviaGameSlice,
   modalSlice,
+  currentGame,
 } from "./slices";
 
 // TODO: unificar y resolver TriviaCards con cards
 
 export const store = configureStore({
   reducer: {
-    game: gameSlice.reducer,
-    gameCards: gameCardsSlice.reducer,
-    triviaCard: triviaCardSlice.reducer,
+    currentGame: currentGame.reducer,
+    memoGame: memoGameSlice.reducer,
+    memoCards: memoCardsSlice.reducer,
+    triviaGame: triviaGameSlice.reducer,
+    triviaCards: triviaCardsSlice.reducer,
     time: timeSlice,
     steps: stepsSlice.reducer,
-    trivia: triviaSlice.reducer,
     modalSlice: modalSlice.reducer,
   },
 });
