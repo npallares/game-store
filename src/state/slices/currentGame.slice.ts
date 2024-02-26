@@ -5,7 +5,7 @@ import { RootState } from "../store";
 import { GAMES } from "../../enums/games";
 
 type SetGamePayload = {
-  theme: GAMES;
+  game: GAMES;
 };
 
 type SetThemePayload = {
@@ -29,7 +29,7 @@ export const currentGame = createSlice({
   initialState,
   reducers: {
     setCurrentGame: (state, action: PayloadAction<SetGamePayload>) => {
-      state.game = action.payload.theme;
+      state.game = action.payload.game;
     },
     setCurrentGameTheme: (state, action: PayloadAction<SetThemePayload>) => {
       state.theme = action.payload.theme;
@@ -49,6 +49,7 @@ export const currentGame = createSlice({
 });
 
 export const {
+  setCurrentGame,
   setCurrentGameTheme,
   startCurrentGame,
   setStatusLoaded,

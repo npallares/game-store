@@ -2,10 +2,10 @@ import { TRIVIA_CARDS_IDS } from "../../enums/triviaCardsIds";
 import { TriviaCard } from "../../types/cards/card_types";
 
 const FUTBOL_VALUES = {
-  ONE: "cuti romero",
-  TWO: "lionel messi",
-  THREE: "paulo dybala",
-  FOUR: "enzo fernandez",
+  ONE: "Romero",
+  TWO: "Messi",
+  THREE: "Dybala",
+  FOUR: "Fernandez",
 };
 
 const FUTBOL_IMAGES = {

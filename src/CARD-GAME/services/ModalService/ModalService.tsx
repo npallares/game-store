@@ -4,7 +4,7 @@ import styles from "./modal.module.scss";
 import { useAppDispatch, useAppSelector } from "../../../state/hooks";
 import {
   setFinishedTimestamp,
-  getFinalTime,
+  setFinalTime,
 } from "../../../state/slices/time.slice";
 import {
   setEfficiency,
@@ -12,7 +12,10 @@ import {
 } from "../../../state/slices/steps.slice";
 import ModalTriviaTempalte from "../../../ui/templates/ModalTriviaTemplate/ModalTriviaTemplate";
 import { GAMES } from "../../../enums/games";
-import { getCurrentGame, getCurrentGametheme } from "../../../state/slices/currentGame.slice";
+import {
+  getCurrentGame,
+  getCurrentGametheme,
+} from "../../../state/slices/currentGame.slice";
 
 const ModalService = () => {
   const dispatch = useAppDispatch();
@@ -25,8 +28,7 @@ const ModalService = () => {
   //const steps = useAppSelector((state) => state.steps.steps);
   //const isOtheGame = currentGame === GAMES.OTHER;
 
-  const closeModal = currentGame === GAMES.OTHER
-  ;
+  const closeModal = currentGame === GAMES.OTHER;
   const isTriviaGame = currentGame === GAMES.TRIVIA_GAME;
   const isMemoGame = currentGame === GAMES.CARDS_GAME;
 
@@ -38,15 +40,16 @@ const ModalService = () => {
 
   useEffect(() => {
     dispatch(setFinishedTimestamp());
-    dispatch(getFinalTime());
+    dispatch(setFinalTime());
     dispatch(setEfficiency());
   });
 
-  if(closeModal)return (
-    <div className={styles.modalContainer}>
-      <Outlet />
-    </div>
-  );
+  if (closeModal)
+    return (
+      <div className={styles.modalContainer}>
+        <Outlet />
+      </div>
+    );
 
   if (isTriviaGame)
     return (

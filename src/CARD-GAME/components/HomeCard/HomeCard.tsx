@@ -41,6 +41,8 @@ const HomeCard = ({
     objectPosition: "center",
   });
 
+  const isDisabled = disabled ? 'auto' : 'pointer'
+
   return (
     <Paper
       sx={{
@@ -49,17 +51,19 @@ const HomeCard = ({
         flexDirection: "column",
         overflow: "hidden",
         m: 5,
+        marginTop: 1,
         borderRadius: 3,
         borderColor: "grey",
         border: 1,
+        cursor: isDisabled,
       }}
+      onClick={() => !disabled && handleClick()}
     >
       <Img src={getImage(theme)} />
       <Box sx={{ p: 0 }}>
         <Button
           variant="contained"
           size="large"
-          onClick={() => handleClick()}
           sx={{ width: "100%", height: 50 }}
           disabled={disabled}
         >

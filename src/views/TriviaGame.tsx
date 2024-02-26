@@ -1,4 +1,4 @@
-import { Container, Grid,  styled } from "@mui/material";
+import { Container, Grid, Typography, styled } from "@mui/material";
 import { useAppDispatch, useAppSelector } from "../state/hooks";
 import {
   selectTriviaCards,
@@ -15,23 +15,17 @@ import { TriviaCard, TriviaDisplay } from "../ui";
 import { STATUS } from "../enums/status";
 import { getFutbolImages } from "../utils/getFutbolImages";
 import { OPTIONS } from "../enums/options";
-import { useParams } from "react-router-dom";
-import getImage from "../helpers/getImageByTheme";
+import { useNavigate, useParams } from "react-router-dom";
 import { THEMES } from "../enums/theme";
 import {
   getCurrentGameStatus,
   getCurrentGametheme,
+  setCurrentGame,
   setCurrentGameTheme,
   setStatusLoaded,
   startCurrentGame,
 } from "../state/slices/currentGame.slice";
-
-const Img = styled("img")({
-  width: "auto",
-  height: "50%",
-  objectFit: "cover",
-  objectPosition: "center",
-});
+import { GAMES } from "../enums/games";
 
 const PLAYERS = {
   CUTI: OPTIONS.ONE,
@@ -74,6 +68,7 @@ const initialStateCurrentQuestion = testQuestions[0];
 
 const TriviaGame = () => {
   const { theme } = useParams();
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const triviaCardsStatus = useAppSelector(selectTriviaCardsStatus);
   const triviaCards = useAppSelector(selectTriviaCards);
@@ -94,20 +89,22 @@ const TriviaGame = () => {
     return;
   };
 
-  const handlerClick = (cardId: string) => {
+  const handlerClick = (cardId: string, value: string) => {
     setNumberOfQuestionCounter(questionCounter.length);
-    dispatch(addQuestionCounter({ id: cardId }));
+    dispatch(addQuestionCounter({ id: value }));
     const checkIsMatch = currentQuestion.id === cardId;
     if (checkIsMatch) return matchHandler();
-    return console.log("NO MATCH");
+    //return console.log("NO MATCH");
   };
 
   useEffect(() => {
     if (currentGameStatus === STATUS.UNINITIALIZED)
       dispatch(startCurrentGame());
+    dispatch(setCurrentGame({ game: GAMES.TRIVIA_GAME }));
+    dispatch(setCurrentGameTheme({ theme: THEMES.FUTBOL }));
     if (!currentGametheme)
       dispatch(setCurrentGameTheme({ theme: currentGametheme }));
-  }, [dispatch]);
+  }, [currentGameStatus, currentGametheme, dispatch]);
 
   useEffect(() => {
     if (!theme || triviaCardsStatus === STATUS.LOADED) return;
@@ -116,8 +113,14 @@ const TriviaGame = () => {
 
   useEffect(() => {
     if (currentGameStatus === STATUS.LOADING && isEndGame) {
-      void dispatch(setStatusLoaded());
-      console.log("GAME OVERR - RENDER MODAL");
+      //console.log("GAME OVERR - RENDER MODAL");
+      dispatch(setStatusLoaded());
+    }
+  }, [isEndGame, dispatch, currentGameStatus]);
+
+  useEffect(() => {
+    if (currentGameStatus === STATUS.LOADING && !isEndGame) {
+      //console.log("CHANGE QUESTION");
       setCurrentQuestion(testQuestions[numberOfQuestionCounter]);
     }
   }, [
@@ -140,7 +143,19 @@ const TriviaGame = () => {
             alignItems: "center",
           }}
         >
-          <Img src={getImage(THEMES.LOGO)} />
+          <Typography
+            variant="h5"
+            marginLeft={"10px"}
+            m={"40px"}
+            sx={{
+              fontFamily: "Bruno ace",
+              fontSize: "30px",
+              cursor: "pointer",
+            }}
+            onClick={() => navigate("/")}
+          >
+            {"GAME STORE"}
+          </Typography>
         </Grid>
       </Grid>
       <Grid container component="section" p={3}>
@@ -182,7 +197,7 @@ const TriviaGame = () => {
               <TriviaCard
                 id={card.id}
                 value={card.value}
-                onClick={() => handlerClick(card.id)}
+                onClick={() => handlerClick(card.id, card.value)}
                 image={getFutbolImages(card.id)}
               />
             </Grid>

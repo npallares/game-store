@@ -20,7 +20,7 @@ import {
 } from "../state/slices/memoCards.slice";
 import checkIsDone from "../utils/checkIsDone";
 import type { GameCard } from "../types/cards/card_types";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { setCards } from "../state/slices/memoCards.slice";
 import { addStep } from "../state/slices/steps.slice";
 import { STATUS } from "../enums/status";
@@ -31,10 +31,12 @@ import {
   startCurrentGame,
   setStatusLoaded,
   setCurrentGamseStatusToInitialState,
+  setCurrentGame,
 } from "../state/slices/currentGame.slice";
 import { THEMES } from "../enums/theme";
-import { Box, Paper, styled } from "@mui/material";
+import { Box, Typography, styled } from "@mui/material";
 import getImage from "../helpers/getImageByTheme";
+import { GAMES } from "../enums/games";
 
 const getCurrentTheme = (theme: string | undefined): THEMES => {
   if (theme === `:${THEMES.POKEMON}`) return THEMES.POKEMON;
@@ -42,21 +44,16 @@ const getCurrentTheme = (theme: string | undefined): THEMES => {
   return THEMES.OTHER;
 };
 
-const Img = styled("img")({
-  width: "auto",
-  height: "50%",
-  objectFit: "cover",
-  objectPosition: "center",
-});
-
 const MemoGame = () => {
   const { theme } = useParams();
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const memoGameStatus = useAppSelector(getMemoGamesStatus);
   const cards = useAppSelector(getMemoGameCards);
   const memoGame = useAppSelector(selectMemoGame);
   const currentGameStatus = useAppSelector(getCurrentGameStatus);
   const currentGametheme = useAppSelector(getCurrentGametheme);
+  console.log("Nicolas", theme);
   const currentTheme = getCurrentTheme(theme);
 
   const { firstCardId, secondCardId, isMatch } = memoGame;
@@ -140,7 +137,7 @@ const MemoGame = () => {
     if (!currentGametheme)
       dispatch(setCurrentGameTheme({ theme: currentTheme }));
   }, [currentGameStatus, dispatch]);
-  
+
   useEffect(() => {
     const isOver = cards.every((card) => card.done === true);
     if (currentGameStatus === STATUS.LOADING && isOver)
@@ -159,12 +156,22 @@ const MemoGame = () => {
     gameFunction();
   }, [memoGame.isMatch]);
 
+  useEffect(() => {
+    dispatch(setCurrentGame({ game: GAMES.CARDS_GAME }));
+  }, []);
+
   return (
-    <div
-      className={styles.background}
-    >
+    <div className={styles.background}>
       <Box>
-        <Img src={getImage(THEMES.LOGO)} />
+        <Typography
+          variant="h5"
+          marginTop={"-12px"}
+          marginBottom={"50px"}
+          sx={{ fontFamily: "Bruno ace", fontSize: "30px", cursor: "pointer" }}
+          onClick={() => navigate("/")}
+        >
+          {"GAME STORE"}
+        </Typography>
       </Box>
       <div className={styles.container}>
         {cards.map((card: GameCard) => {

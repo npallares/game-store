@@ -1,16 +1,25 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getTime, millisecondsToSeconds } from "date-fns";
+import { differenceInSeconds, getTime, millisecondsToSeconds } from "date-fns";
+import { RootState } from "../store";
 
 interface TimeReducer {
   initialTimestamp: number | null | Date;
   finishedTimestamp: number | null | Date;
-  finalTime: object | number | string | null;
+  finalTime: number | null;
 }
 
 const initialState: TimeReducer = {
   initialTimestamp: null,
   finishedTimestamp: null,
   finalTime: null,
+};
+
+const getMiliseconds = (
+  initialTimeStamp: number,
+  finishedTimeStamp: number
+): number => {
+  const miliseconds = differenceInSeconds(initialTimeStamp, finishedTimeStamp);
+  return miliseconds;
 };
 
 export const timeSlice = createSlice({
@@ -25,27 +34,29 @@ export const timeSlice = createSlice({
       const currentTime = new Date(); // Log
       state.finishedTimestamp = getTime(currentTime);
     },
-    getFinalTime: (state) => {
-        const { initialTimestamp, finishedTimestamp } = state;
-        
-        const diffInMilliseconds =
-        Number(finishedTimestamp) - Number(initialTimestamp);
-        const diffInSeconds = millisecondsToSeconds(diffInMilliseconds);
-        state.finalTime = getTime(diffInSeconds);
+    setFinalTime: (state) => {
+      const { initialTimestamp, finishedTimestamp } = state;
+      state.finalTime = getMiliseconds(
+        Number(finishedTimestamp),
+        Number(initialTimestamp)
+      );
     },
     setInitialState: (state) => {
-        state.initialTimestamp = null;
-        state.finishedTimestamp = null;
-        state.finalTime = null;
+      state.initialTimestamp = null;
+      state.finishedTimestamp = null;
+      state.finalTime = null;
     },
   },
 });
 
 export const {
   setFinishedTimestamp,
-  getFinalTime,
+  setFinalTime,
   setInitialTimestamp,
   setInitialState,
 } = timeSlice.actions; // Corrected the export statement
 
 export default timeSlice.reducer; // Export the reducer as
+
+export const getFinalTime = (state: RootState): number | null =>
+  state.time.finalTime;
