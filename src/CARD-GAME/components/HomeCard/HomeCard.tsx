@@ -1,9 +1,6 @@
-//import Button from "@mui/material/Button";
-//import styles from "./homeCard.module.scss";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../../../state/hooks";
 import { setInitialTimestamp } from "../../../state/slices/time.slice";
-//import { THEME } from "../../../helpers/config";
 import getImage from "../../../helpers/getImageByTheme";
 import { Box, Button, Paper } from "@mui/material";
 import styled from "@emotion/styled";

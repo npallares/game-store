@@ -1,4 +1,4 @@
-import { Container, Grid, Typography, styled } from "@mui/material";
+import { Container, Grid, Typography } from "@mui/material";
 import { useAppDispatch, useAppSelector } from "../state/hooks";
 import {
   selectTriviaCards,
@@ -63,18 +63,14 @@ const TOPIC = {
 };
 
 const testQuestions = [
-  // DATE
   { id: PLAYERS.CUTI, value: TOPIC.RANDOM_ONE.cuti },
   { id: PLAYERS.MESSI, value: TOPIC.DATE.messi },
   { id: PLAYERS.DYBALA, value: TOPIC.DATE.dybala },
   { id: PLAYERS.ENZO, value: TOPIC.DATE.enzo },
-  // DEBUT
   { id: PLAYERS.CUTI, value: TOPIC.RANDOM_TWO.cuti },
   { id: PLAYERS.MESSI, value: TOPIC.RANDOM_TWO.messi },
   { id: PLAYERS.DYBALA, value: TOPIC.DEBUT.dybala },
   { id: PLAYERS.ENZO, value: TOPIC.DEBUT.enzo },
-  // KEY
-  //{ id: PLAYERS.DYBALA, value: TOPIC.KEY },
 ];
 
 const initialStateCurrentQuestion = testQuestions[0];
@@ -107,7 +103,6 @@ const TriviaGame = () => {
     dispatch(addQuestionCounter({ id: value }));
     const checkIsMatch = currentQuestion.id === cardId;
     if (checkIsMatch) return matchHandler();
-    //return console.log("NO MATCH");
   };
 
   useEffect(() => {
@@ -126,14 +121,12 @@ const TriviaGame = () => {
 
   useEffect(() => {
     if (currentGameStatus === STATUS.LOADING && isEndGame) {
-      //console.log("GAME OVERR - RENDER MODAL");
       dispatch(setStatusLoaded());
     }
   }, [isEndGame, dispatch, currentGameStatus]);
 
   useEffect(() => {
     if (currentGameStatus === STATUS.LOADING && !isEndGame) {
-      //console.log("CHANGE QUESTION");
       setCurrentQuestion(testQuestions[numberOfQuestionCounter]);
     }
   }, [

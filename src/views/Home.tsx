@@ -4,11 +4,10 @@ import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
 import { useEffect } from "react";
-import { Box, Container, Grid, Paper, Typography, styled } from "@mui/material";
+import { Box, Container, Grid,  Typography } from "@mui/material";
 import HomeCard from "../CARD-GAME/components/HomeCard/HomeCard";
 import { useAppDispatch, useAppSelector } from "../state/hooks";
 import { setCardsInitialState } from "../state/slices/memoCards.slice";
-import getImage from "../helpers/getImageByTheme";
 import { setTriviaCardInitialState } from "../state/slices/triviaCards.slice";
 import getUrlByThemeAndGame from "../helpers/getUrlByThemeAndGame";
 import { GAMES } from "../enums/games";
@@ -176,12 +175,3 @@ const Home = () => {
 };
 
 export default Home;
-
-/* 
-
-Game store es un ejercicio práctico realizado con TypeScript,
-Redux Toolkit, Material UI, entre otras.<br></br>Ambos juegos
-apelan a la memoria, para posteriormente contar cuanto tiempo se
-demoró la resolucón y otros datos mas de la partida =D
-
-*/

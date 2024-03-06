@@ -52,7 +52,6 @@ const MemoGame = () => {
   const memoGame = useAppSelector(selectMemoGame);
   const currentGameStatus = useAppSelector(getCurrentGameStatus);
   const currentGametheme = useAppSelector(getCurrentGametheme);
-  console.log("Nicolas", theme);
   const currentTheme = getCurrentTheme(theme);
 
   const { firstCardId, secondCardId, isMatch } = memoGame;

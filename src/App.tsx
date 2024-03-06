@@ -2,7 +2,6 @@
 import "./styles/index.css";
 import { Route, Routes } from "react-router-dom";
 import MemoGame from "./views/MemoGame";
-import Material from "./views/Material";
 import React from "react";
 import { Home, TriviaGame } from "./views";
 import Modal from "./views/Modal";
@@ -16,7 +15,6 @@ function App() {
           <Route index element={<Home />} />
           <Route path={PATHS.CARD_GAME} element={<MemoGame />} />
           <Route path={PATHS.TRIVIA_GAME} element={<TriviaGame />} />
-          <Route path="/material" element={<Material />} />
           <Route path="/modal" element={<Modal />} />
         </Route>
       </Routes>
