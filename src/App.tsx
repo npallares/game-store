@@ -7,7 +7,6 @@ import React from "react";
 import { Home, TriviaGame } from "./views";
 import Modal from "./views/Modal";
 import { PATHS } from "./enums/paths";
-import { RouterProvider } from 'react-router-dom';
 
 function App() {
   return (

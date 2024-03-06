@@ -1,4 +1,4 @@
-import { Box, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
 
 interface TriviaDisplayProps {
   query: string;
@@ -6,7 +6,7 @@ interface TriviaDisplayProps {
 
 const TriviaDisplay: React.FC<TriviaDisplayProps> = ({ query }) => {
   return (
-    <Typography variant="h5" gutterBottom sx={{ m: 5 }}>
+    <Typography variant="body1" height={25} gutterBottom sx={{ m: 5 }}>
       {query}
     </Typography>
   );

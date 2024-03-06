@@ -41,7 +41,7 @@ const HomeCard = ({
     objectPosition: "center",
   });
 
-  const isDisabled = disabled ? 'auto' : 'pointer'
+  const isDisabled = disabled ? "auto" : "pointer";
 
   return (
     <Paper
@@ -64,7 +64,7 @@ const HomeCard = ({
         <Button
           variant="contained"
           size="large"
-          sx={{ width: "100%", height: 50 }}
+          sx={{ width: "100%", height: 50, borderRadius:'0' }}
           disabled={disabled}
         >
           {theme}

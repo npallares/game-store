@@ -34,8 +34,7 @@ import {
   setCurrentGame,
 } from "../state/slices/currentGame.slice";
 import { THEMES } from "../enums/theme";
-import { Box, Typography, styled } from "@mui/material";
-import getImage from "../helpers/getImageByTheme";
+import { Box, Typography } from "@mui/material";
 import { GAMES } from "../enums/games";
 
 const getCurrentTheme = (theme: string | undefined): THEMES => {
@@ -165,9 +164,9 @@ const MemoGame = () => {
       <Box>
         <Typography
           variant="h5"
-          marginTop={"-12px"}
+          marginTop={"-30px"}
           marginBottom={"50px"}
-          sx={{ fontFamily: "Bruno ace", fontSize: "30px", cursor: "pointer" }}
+          sx={{ fontFamily: "Bruno ace", fontSize: "90px", cursor: "pointer" }}
           onClick={() => navigate("/")}
         >
           {"GAME STORE"}

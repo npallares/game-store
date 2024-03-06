@@ -47,17 +47,30 @@ const TOPIC = {
     dybala: "Debutó profesionalmente en el club Instituto de Córdoba",
     enzo: "Debutó profesionalmente en el club Atlético Las Heras",
   },
+  RANDOM_ONE: {
+    cuti: "En julio de 2018 se unió al Genoa FC. ",
+    messi: "Debutó profesionalmente en el club FC Barcelona",
+    dybala: "Debutó profesionalmente en el club Instituto de Córdoba",
+    enzo: "Debutó profesionalmente en el club Atlético Las Heras",
+  },
+  RANDOM_TWO: {
+    cuti: "Debutó con la selección argentina el 3 de junio de 2021 en el empate 1-1 frente a Chile, siendo la figura del equipo argentino.",
+    messi:
+      "Fue su abuela materna, Celia, la que lo alentó a dedicarse al fútbol y a quien él agradece tras convertir un gol",
+    dybala: "Debutó profesionalmente en el club Instituto de Córdoba",
+    enzo: "Debutó profesionalmente en el club Atlético Las Heras",
+  },
 };
 
 const testQuestions = [
   // DATE
-  { id: PLAYERS.CUTI, value: TOPIC.DATE.cuti },
+  { id: PLAYERS.CUTI, value: TOPIC.RANDOM_ONE.cuti },
   { id: PLAYERS.MESSI, value: TOPIC.DATE.messi },
   { id: PLAYERS.DYBALA, value: TOPIC.DATE.dybala },
   { id: PLAYERS.ENZO, value: TOPIC.DATE.enzo },
   // DEBUT
-  { id: PLAYERS.CUTI, value: TOPIC.DEBUT.cuti },
-  { id: PLAYERS.MESSI, value: TOPIC.DEBUT.messi },
+  { id: PLAYERS.CUTI, value: TOPIC.RANDOM_TWO.cuti },
+  { id: PLAYERS.MESSI, value: TOPIC.RANDOM_TWO.messi },
   { id: PLAYERS.DYBALA, value: TOPIC.DEBUT.dybala },
   { id: PLAYERS.ENZO, value: TOPIC.DEBUT.enzo },
   // KEY
@@ -146,10 +159,10 @@ const TriviaGame = () => {
           <Typography
             variant="h5"
             marginLeft={"10px"}
-            m={"40px"}
+            m={"20px"}
             sx={{
               fontFamily: "Bruno ace",
-              fontSize: "30px",
+              fontSize: "90px",
               cursor: "pointer",
             }}
             onClick={() => navigate("/")}

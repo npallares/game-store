@@ -20,6 +20,7 @@ import {
   setStatusLoaded,
 } from "../state/slices/currentGame.slice";
 import { triviaGameSliceToInitialState } from "../state/slices/triviaGame.slice";
+import { setStepsInitialState } from "../state/slices/steps.slice";
 
 const Home = () => {
   const dispatch = useAppDispatch();
@@ -28,6 +29,7 @@ const Home = () => {
   useEffect(() => {
     dispatch(setCardsInitialState());
     dispatch(setTriviaCardInitialState());
+    dispatch(setStepsInitialState());
   });
 
   useEffect(() => {
@@ -36,12 +38,8 @@ const Home = () => {
     dispatch(triviaGameSliceToInitialState());
   }, [dispatch, currentGameStatus]);
 
-  const Img = styled("img")({
-    width: "auto",
-    height: "50%",
-    objectFit: "cover",
-    objectPosition: "center",
-  });
+  const text =
+    "Game store es un ejercicio práctico realizado con TypeScript, Redux Toolkit y Material UI. Los juegos apelan a la memoria y el conocimiento, para posteriormente contabilizar cuanto tiempo se demoró el usuario en la resolucón, en cuantos pasos lo hizo y otras metricas.";
 
   return (
     <Container component="section">
@@ -55,13 +53,16 @@ const Home = () => {
             alignItems: "center",
           }}
         >
-            <Typography
-              variant="h5"
-              m={"40px"}
-              sx={{ fontFamily: "Bruno ace", fontSize: "30px" }}
-            >
-              {"GAME STORE"}
-            </Typography>
+          <Typography
+            variant="h5"
+            m={"20px"}
+            sx={{
+              fontFamily: "Bruno ace",
+              fontSize: "90px",
+            }}
+          >
+            {"GAME STORE"}
+          </Typography>
         </Grid>
 
         <Grid item md={6}>
@@ -125,11 +126,7 @@ const Home = () => {
               fontSize={"large"}
               sx={{ marginLeft: "40px" }}
             />
-            <Typography
-              variant="h5"
-              marginLeft={"10px"}
-              marginBottom={"-40px"}
-            >
+            <Typography variant="h5" marginLeft={"10px"} marginBottom={"-40px"}>
               Trivia Game
             </Typography>
           </Box>
@@ -142,9 +139,49 @@ const Home = () => {
             })}
           />
         </Grid>
+        <Grid
+          item
+          md={2}
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        ></Grid>
+        <Grid
+          item
+          md={8}
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <Typography
+            variant="h5"
+            m={"10px"}
+            sx={{
+              fontSize: "10px",
+              textAlign: "center",
+              padding: "0 60px",
+              margin: "-5px 0",
+            }}
+          >
+            {text}
+          </Typography>
+        </Grid>
       </Grid>
     </Container>
   );
 };
 
 export default Home;
+
+/* 
+
+Game store es un ejercicio práctico realizado con TypeScript,
+Redux Toolkit, Material UI, entre otras.<br></br>Ambos juegos
+apelan a la memoria, para posteriormente contar cuanto tiempo se
+demoró la resolucón y otros datos mas de la partida =D
+
+*/

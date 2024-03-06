@@ -1,5 +1,5 @@
 import { Outlet } from "react-router-dom";
-import styles from "../CARD-GAME/services/ModalService/modal.module.scss";
+import styles from "./modal.module.scss";
 import { useAppDispatch, useAppSelector } from "../state/hooks";
 import TriviaModal from "../ui/templates/Modals/TriviaModal";
 import {
