@@ -36,6 +36,7 @@ import {
 import { THEMES } from "../enums/theme";
 import { Box, Typography } from "@mui/material";
 import { GAMES } from "../enums/games";
+import { PATHS } from "../enums/paths";
 
 const getCurrentTheme = (theme: string | undefined): THEMES => {
   if (theme === `:${THEMES.POKEMON}`) return THEMES.POKEMON;
@@ -166,7 +167,7 @@ const MemoGame = () => {
           marginTop={"-30px"}
           marginBottom={"50px"}
           sx={{ fontFamily: "Bruno ace", fontSize: "90px", cursor: "pointer" }}
-          onClick={() => navigate("/")}
+          onClick={() => navigate(PATHS.HOME)}
         >
           {"GAME STORE"}
         </Typography>

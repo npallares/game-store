@@ -1,4 +1,4 @@
-import { Container, Grid, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
 import { useAppDispatch, useAppSelector } from "../state/hooks";
 import {
   selectTriviaCards,
@@ -11,7 +11,7 @@ import {
   addQuestionCounter,
   getLogs,
 } from "../state/slices/triviaGame.slice";
-import { TriviaCard, TriviaDisplay } from "../ui";
+import { TriviaCard } from "../ui";
 import { STATUS } from "../enums/status";
 import { getFutbolImages } from "../utils/getFutbolImages";
 import { OPTIONS } from "../enums/options";
@@ -26,6 +26,8 @@ import {
   startCurrentGame,
 } from "../state/slices/currentGame.slice";
 import { GAMES } from "../enums/games";
+import styles from "./TriviaGame.module.scss"
+import { PATHS } from "../enums/paths";
 
 const PLAYERS = {
   CUTI: OPTIONS.ONE,
@@ -115,7 +117,7 @@ const TriviaGame = () => {
   }, [currentGameStatus, currentGametheme, dispatch]);
 
   useEffect(() => {
-    if (!theme || triviaCardsStatus === STATUS.LOADED) return;
+    if (!theme) return;
     void dispatch(setTriviaCard(theme));
   }, [triviaCardsStatus, theme, dispatch]);
 
@@ -137,19 +139,11 @@ const TriviaGame = () => {
     currentGameStatus,
   ]);
 
+  if(!triviaCards) return(<div>{'Loading..'}</div>)
+    console.log('Nico triviaCards', triviaCards)
   return (
-    <Container component="article">
-      <Grid container spacing={1}>
-        <Grid
-          item
-          md={12}
-          sx={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
-          <Typography
+    <section className={styles.triviaGameContainer}>
+      <Typography
             variant="h5"
             marginLeft={"10px"}
             m={"20px"}
@@ -158,60 +152,28 @@ const TriviaGame = () => {
               fontSize: "90px",
               cursor: "pointer",
             }}
-            onClick={() => navigate("/")}
+            onClick={() => navigate(PATHS.HOME)}
           >
             {"GAME STORE"}
-          </Typography>
-        </Grid>
-      </Grid>
-      <Grid container component="section" p={3}>
-        <Grid
-          border={1}
-          borderRadius={3}
-          item
-          md={12}
-          key={currentQuestion.id}
-          sx={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            width: "100%",
-            margin: 0,
-            backgroundColor: "#424242",
-            color: "white",
-          }}
-        >
-          <TriviaDisplay query={currentQuestion.value} />
-        </Grid>
-      </Grid>
-      <Grid container component="ul" sx={{ paddingLeft: 0, paddingTop: 1,  border: 1, }}>
-        {triviaCards.map((card) => {
-          return (
-            <Grid
-              component="li"
-              key={card.id}
-              item
-              md={3}
-              sx={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                width: "100%",
-                margin: 0,
-              }}
-            >
-              <TriviaCard
+      </Typography>
+      <div id={currentQuestion.id} className={styles.questionContainer}>
+        <span>{currentQuestion.value}</span>
+      </div>
+      <div className={styles.triviaCardsContainer}>
+        {triviaCards.map((card)=>{
+          return(
+            <TriviaCard
+                key={card.id}
                 id={card.id}
                 value={card.value}
                 onClick={() => handlerClick(card.id, card.value)}
                 image={getFutbolImages(card.id)}
               />
-            </Grid>
-          );
+          )
         })}
-      </Grid>
-    </Container>
-  );
+      </div>
+    </section>
+  )
 };
 
 export default TriviaGame;

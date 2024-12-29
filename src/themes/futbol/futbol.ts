@@ -9,10 +9,10 @@ const FUTBOL_VALUES = {
 };
 
 const FUTBOL_IMAGES = {
-  ONE: "/src/assets/cards/futbol/one.jpg",
-  TWO: "/src/assets/cards/futbol/two.jpg",
-  THREE: "/src/assets/cards/futbol/three.jpg",
-  FOUR: "/src/assets/cards/futbol/four.jpg",
+  ONE: "/src/cards/futbol/one.jpg",
+  TWO: "/src/cards/futbol/two.jpg",
+  THREE: "/src/cards/futbol/three.jpg",
+  FOUR: "/src/cards/futbol/four.jpg",
 };
 
 export const futbolCards: TriviaCard[] = [

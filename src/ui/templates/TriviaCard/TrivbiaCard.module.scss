@@ -1,0 +1,39 @@
+.triviaCardButtonContainer{
+    flex-direction:row;
+    height: 100%;
+    width: auto;
+    cursor: pointer;
+    border: none;
+    
+    button{
+        cursor: pointer;
+        background: none;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 0;
+        margin: 0;
+        border: none;
+        
+        :hover{
+            border: .2rem solid rgb(29, 255, 67);
+        }
+
+        
+        img{
+            //border: 3px solid rgb(187, 255, 0);
+            height: 100%;
+            width: 200%;
+            border-radius: 15px;
+        }
+    }
+}
+
+.buttonContainer{
+    height: 150px;
+    
+    img{
+        height: 150px;
+        
+    }
+}

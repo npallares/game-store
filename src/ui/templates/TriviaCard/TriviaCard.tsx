@@ -1,5 +1,6 @@
 import { Button, Paper } from "@mui/material";
 import { Images } from "../../index";
+import styles from "./TrivbiaCard.module.scss"
 
 interface TriviaCardProps {
   value: string;
@@ -14,6 +15,13 @@ const TriviaCard: React.FC<TriviaCardProps> = ({
   onClick,
 }: TriviaCardProps) => {
   const isDisabled = !onClick ? true : false;
+  return(
+    <div className={styles.triviaCardButtonContainer}>
+      <button onClick={onClick} disabled={isDisabled} className={styles.buttonContainer}>
+        <img src={image}/>     
+      </button>
+    </div>
+  )
   return (
     <Paper
       component="span"

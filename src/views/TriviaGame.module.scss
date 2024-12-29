@@ -1,0 +1,30 @@
+.triviaGameContainer{
+    width: 100vw;
+    height: 90vh;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+}
+
+.triviaCardsContainer{
+    width: 80%;
+    //padding: 50px 30px;
+    height: 20%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+}
+
+.questionContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80vw;
+    height: 150px;
+    background-color: #212121;
+    color: white;
+    border-radius: 15px;
+    margin-bottom: 50px;
+}

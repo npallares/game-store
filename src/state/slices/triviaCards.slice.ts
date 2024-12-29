@@ -19,10 +19,10 @@ export const triviaCardsSlice = createSlice({
   initialState,
   reducers: {
     setTriviaCard: (state, action: PayloadAction<string>) => {
-      const selectedTheme =
+      const selectedTheme = futbolCards
         action.payload === ":futbol" ? futbolCards : futbolCards;
       const cards = selectedTheme;
-      if (state.status === STATUS.LOADED) cards.map((card) => state.cards.push(card));
+      if (state.status === STATUS.UNINITIALIZED) cards.map((card) => state.cards.push(card));
       state.status = STATUS.LOADED;
     },
 
