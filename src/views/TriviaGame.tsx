@@ -184,7 +184,7 @@ const TriviaGame = () => {
           <TriviaDisplay query={currentQuestion.value} />
         </Grid>
       </Grid>
-      <Grid container component="ul" sx={{ paddingLeft: 0, paddingTop: 1 }}>
+      <Grid container component="ul" sx={{ paddingLeft: 0, paddingTop: 1,  border: 1, }}>
         {triviaCards.map((card) => {
           return (
             <Grid
