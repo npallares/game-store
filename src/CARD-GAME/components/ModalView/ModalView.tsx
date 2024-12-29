@@ -4,8 +4,8 @@ import { MouseEventHandler } from "react";
 import { Button } from "@mui/material";
 import {
   Modal,
-  getIsTriviaGame,
-  getModalSliceStatus,
+  getModalthme,
+  getModalStatus,
 } from "../../../state/slices/modal.slice";
 import { useAppSelector } from "../../../state/hooks";
 import { STATUS } from "../../../enums/status";
@@ -28,11 +28,10 @@ const ModalView = ({
   time = null,
   steps = null,
   efficiency = null,
-  theme = null,
   onClick,
 }: ModalProps) => {
-  const modalStatus = useAppSelector(getModalSliceStatus);
-  const isTriviaGame = useAppSelector(getIsTriviaGame);
+  const modalStatus = useAppSelector(getModalStatus);
+  const isTriviaGame = useAppSelector(getModalthme);
   const matches = useAppSelector(selectMatchCounter);
   const logs = useAppSelector(selectQuestionCounter);
   if (modalStatus !== STATUS.LOADED) return;

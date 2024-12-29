@@ -14,6 +14,7 @@ import {
   getLogs,
   selectMatchCounter,
 } from "../../../state/slices/triviaGame.slice";
+import { PATHS } from "../../../enums/paths";
 
 const style = {
   position: "absolute",
@@ -41,13 +42,13 @@ const TriviaModal = () => {
   const wrongs = numberOfQuestions - matches;
 
   const handleClose = () => {
-    navigate("/");
+    navigate(PATHS.HOME);
     setOpen(false);
     //console.log("GOING GO HOME!!");
   };
 
   const handleClick = () => {
-    navigate("/");
+    navigate(PATHS.HOME);
     handleClose();
     //console.log("COLSED!!");
   };

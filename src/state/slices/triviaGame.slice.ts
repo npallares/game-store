@@ -40,3 +40,6 @@ export const getLogs = (state: RootState): string[] =>
 
 export const selectMatchCounter = (state: RootState): number =>
   state.triviaGame.matchCounter;
+
+export const selectQuestionCounter = (state: RootState): string[] =>
+  state.triviaGame.logs;

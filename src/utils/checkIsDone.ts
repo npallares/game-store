@@ -1,6 +1,6 @@
-import { CardState } from "../types/cards/card_types";
+import { GameCard } from "../types/cards/card_types";
 
-const checkIsDone = (id: string, cardsState: CardState[]) => {
+const checkIsDone = (id: string, cardsState: GameCard[]) => {
   const index = cardsState.findIndex((card) => card.id === id);
   const isDone = cardsState[index]?.done || false;
   return isDone;

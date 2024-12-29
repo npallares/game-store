@@ -12,7 +12,7 @@ function App() {
     <React.StrictMode>
       <Routes>
         <Route path="/" element={<Modal />}>
-          <Route index element={<Home />} />
+          <Route index path="/game-store" element={<Home />} />
           <Route path={PATHS.CARD_GAME} element={<MemoGame />} />
           <Route path={PATHS.TRIVIA_GAME} element={<TriviaGame />} />
           <Route path="/modal" element={<Modal />} />

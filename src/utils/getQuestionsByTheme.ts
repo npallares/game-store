@@ -1,4 +1,4 @@
-import { FUTBOL_QUESTIONS } from "../themes/futbol/futbol";
+/* import { FUTBOL_QUESTIONS } from "../themes/futbol/futbol";
 
 export const getQuestionsByTheme = (theme: string) => {
   switch (theme) {
@@ -9,3 +9,4 @@ export const getQuestionsByTheme = (theme: string) => {
       return FUTBOL_QUESTIONS;
   }
 };
+ */

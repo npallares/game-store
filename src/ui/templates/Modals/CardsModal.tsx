@@ -6,12 +6,10 @@ import { useNavigate } from "react-router-dom";
 import { Typography } from "@mui/material";
 import { useAppSelector } from "../../../state/hooks";
 import { getFinalTime } from "../../../state/slices/time.slice";
-import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import AccessAlarmIcon from "@mui/icons-material/AccessAlarm";
-import ManageHistoryIcon from "@mui/icons-material/ManageHistory";
-import { getLogs } from "../../../state/slices/triviaGame.slice";
 import { getSteps } from "../../../state/slices/steps.slice";
+import { PATHS } from "../../../enums/paths";
 
 const style = {
   position: "absolute",
@@ -33,16 +31,15 @@ const CardsModal = () => {
 
   const finalTime = useAppSelector(getFinalTime);
   const matches = useAppSelector(getSteps);
-  const globalLogs = useAppSelector(getLogs);
 
   const handleClose = () => {
-    navigate("/");
+    navigate(PATHS.HOME);
     setOpen(false);
     //console.log("GOING GO HOME!!");
   };
 
   const handleClick = () => {
-    navigate("/");
+    navigate(PATHS.HOME);
     handleClose();
     //console.log("COLSED!!");
   };

@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { differenceInSeconds, getTime, millisecondsToSeconds } from "date-fns";
+import { differenceInSeconds, getTime } from "date-fns";
 import { RootState } from "../store";
 
 interface TimeReducer {
